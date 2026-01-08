@@ -28,6 +28,8 @@ specifiers:
   react-native-bootsplash: ^6.3.11
   react-native-safe-area-context: ^5.5.2
   react-test-renderer: 19.1.0
+  reactotron-core-client: ^2.9.9
+  reactotron-react-native: ^5.1.18
   typescript: ^5.8.3
 
 dependencies:
@@ -60,6 +62,8 @@ devDependencies:
   lint-staged: 15.5.2
   prettier: 2.8.8
   react-test-renderer: 19.1.0_react@19.1.0
+  reactotron-core-client: 2.9.9
+  reactotron-react-native: 5.1.18_react-native@0.81.5
   typescript: 5.9.3
 
 packages:
@@ -6731,6 +6735,10 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dev: false
 
+  /mitt/3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: true
+
   /mkdirp-classic/0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
     dev: false
@@ -7486,6 +7494,26 @@ packages:
   /react/19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
+
+  /reactotron-core-client/2.9.9:
+    resolution: {integrity: sha512-caI6ZWpfV/gNeCBhm6alxuCpOxYEFxg9FsgVaOXJWZeKjK2egjxkXcUEFWeS3b9mC6Kwi7Wuu79zfeGtkbdAYw==}
+    dependencies:
+      reactotron-core-contract: 0.3.2
+    dev: true
+
+  /reactotron-core-contract/0.3.2:
+    resolution: {integrity: sha512-39ZNLfxxV7WEOszekIRg56F6VFZrQk7+Lei+8MccNESX3VbQzs1uex/GNesxk6CMTS6ytwqYIBAgLyc9WX/PaA==}
+    dev: true
+
+  /reactotron-react-native/5.1.18_react-native@0.81.5:
+    resolution: {integrity: sha512-Nyb/w7tRQICtfvjAJSN6Q/3aRO8L6eTfEcWpDR/atUyoINkyzducMx6yXA+sz1mazxivY16N3VPkmQ1XohQAcg==}
+    peerDependencies:
+      react-native: '>=0.40.0'
+    dependencies:
+      mitt: 3.0.1
+      react-native: 0.81.5_dntpdueijimqpewdzwllhanpoq
+      reactotron-core-client: 2.9.9
+    dev: true
 
   /readable-stream/3.6.2:
     resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
