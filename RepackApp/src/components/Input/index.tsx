@@ -67,7 +67,7 @@ const Input = ({
   }));
 
   const labelClassName = twMerge(
-    'text-xs text-primary',
+    'text-xs text-tertiary',
     value ? 'font-medium' : 'font-regular',
   );
 
@@ -129,7 +129,7 @@ const Input = ({
         <TextInput
           testID="input"
           ref={ref}
-          className="h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-primary"
+          className="h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary"
           editable={editable}
           defaultValue={defaultValue}
           secureTextEntry={secureTextEntry && !showValue}
@@ -166,7 +166,7 @@ const Input = ({
       <Divider className={errorMessage ? 'bg-error' : undefined} />
 
       {errorMessage && (
-        <Text className="text-xs text-primary">{errorMessage}</Text>
+        <Text className="text-xs text-error">{errorMessage}</Text>
       )}
     </View>
   );

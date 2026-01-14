@@ -56,7 +56,7 @@ const Button = ({
   ...restProps
 }: ButtonProps) => {
   const containerClassName = twMerge(
-    'flex-1flex-row justify-center items-center gap-[15px] rounded-[25px] w-full',
+    'flex-row justify-center items-center gap-[15px] rounded-[25px] w-full',
     buttonVariant[variant],
     buttonSize[size],
     disabled && 'opacity-50',
