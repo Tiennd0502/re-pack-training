@@ -11,7 +11,7 @@ export const lightThemes: Theme = {
   senary: colors.gray[500],
   septenary: colors.gray.A500,
 
-  background: colors.white[600],
+  background: colors.white[500],
   bgSelectedMethod: colors.white[400],
   bgIconForm: colors.green[200],
 
@@ -28,13 +28,13 @@ export const lightThemes: Theme = {
 export const darkThemes: Theme = {
   ...lightThemes,
   primary: colors.white[500],
-  tertiary: colors.white[600],
   secondary: colors.black[800],
+  tertiary: colors.white[600],
   quaternary: colors.gray[200],
   quinary: colors.gray.A200,
   senary: colors.gray.A200,
   septenary: colors.gray.A50,
 
-  background: colors.black[800],
+  background: colors.black[500],
   bgSelectedMethod: colors.black[800],
 };

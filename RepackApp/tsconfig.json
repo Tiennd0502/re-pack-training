@@ -4,8 +4,10 @@
   "exclude": ["**/node_modules", "**/Pods"],
   "compilerOptions": {
     "baseUrl": ".",
+    "moduleResolution": "node",
     "paths": {
       "@/*": ["src/*"],
+      "ProfileRemote/Profile": ["src/interfaces/remotes/profile.d.ts"],
       "@/components/*": ["src/components/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/stores/*": ["src/stores/*"],

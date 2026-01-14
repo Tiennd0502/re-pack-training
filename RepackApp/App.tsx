@@ -1,15 +1,13 @@
 import './nativewind.css';
 
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RNBootSplash from 'react-native-bootsplash';
-import { QueryProvider } from './src/providers/QueryProvider';
-import { ThemeProvider } from './src/providers/ThemeProvider';
-import { useThemeStore } from '@/stores/theme';
-import { useTheme } from './src/hooks/useTheme';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import Button from '@/components/Button';
+import { QueryProvider } from './src/providers/QueryProvider';
+import { useThemeStore } from '@/stores/theme';
+import { Navigation } from '@/navigation';
 
 function App() {
   const { initializeTheme, isInitialized } = useThemeStore();
@@ -38,41 +36,13 @@ function App() {
   }
 
   return (
-    <QueryProvider>
-      <ThemeProvider>
+    <GestureHandlerRootView>
+      <QueryProvider>
         <SafeAreaProvider>
-          <AppContent />
+          <Navigation />
         </SafeAreaProvider>
-      </ThemeProvider>
-    </QueryProvider>
-  );
-}
-
-function AppContent() {
-  const { isDark, toggleTheme, colorScheme } = useTheme();
-
-  const handleToggleTheme = () => {
-    toggleTheme();
-  };
-
-  return (
-    <SafeAreaView
-      className={`${isDark ? 'dark ' : ''} flex-1 bg-background text-primary`}
-    >
-      <View className={`${isDark ? 'dark ' : ''} flex-1 bg-background`}>
-        <View className="flex-1 justify-center items-center p-4">
-          <Text className="text-2xl font-bold mb-4 text-primary">
-            NativeWind is configured! 🎉
-          </Text>
-
-          <Text className="text-base mb-4 text-primary">
-            Theme: {isDark ? 'Dark' : 'Light'} ({colorScheme})
-          </Text>
-
-          <Button text="Toggle Theme" onPress={handleToggleTheme} />
-        </View>
-      </View>
-    </SafeAreaView>
+      </QueryProvider>
+    </GestureHandlerRootView>
   );
 }
 
