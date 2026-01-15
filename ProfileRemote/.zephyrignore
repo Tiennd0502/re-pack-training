@@ -1,0 +1,12 @@
+node_modules/
+.git/
+.DS_Store
+*.log
+android/build/
+android/app/build/
+ios/build/
+ios/Pods/
+*.xcuserdata
+*.xcworkspace/xcuserdata
+.env.local
+.env.*.local

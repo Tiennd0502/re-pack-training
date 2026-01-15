@@ -1,7 +1,8 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 import * as Repack from '@callstack/repack';
-// import {withZephyr} from 'zephyr-repack-plugin';
+import { withZephyr } from 'zephyr-repack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -87,4 +88,4 @@ const config = (env, _argv) => {
 	})
 }
 
-export default config;
+export default withZephyr()(config);
