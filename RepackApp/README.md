@@ -1,97 +1,131 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Overview
 
-# Getting Started
+This repo contains a React Native proof-of-concept that mirrors the MoMo wallet home screen while demonstrating **Re.Pack** features:
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+- Code-splitting via `React.lazy` + Suspense.
+- Remote “mini apps” shipped as standalone bundles.
+- Script runtime that resolves chunks from dev server or CDN.
+- Shared React/React Native singletons to avoid duplicate runtimes.
+- Apply UI framework [Nativewind](https://www.nativewind.dev/)
 
-## Step 1: Start Metro
+## Project Structure
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
-
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```
+RePackApp
+├── android                # Android-specific files
+├── ios                    # iOS-specific files
+├── src
+│   ├── assets             # Assets (images, fonts, etc.)
+│   ├── components         # Reusable components
+│   ├── constants          # Constant values used throughout the app
+│   ├── hooks              # Custom hooks
+│   ├── interfaces         # TypeScript interfaces and types
+│   ├── navigation         # Navigation configuration
+│   ├── screens            # Screen components
+│   │   └── Profile        # Remote mini app #1
+│   ├── services           # API services
+│   └── utils              # Utility functions
+├── .eslintrc.js           # ESLint configuration
+├── .prettierrc            # Prettier configuration
+├── app.json               # App configuration
+├── App.tsx                # Main App component
+├── babel.config.js        # Babel configuration
+├── index.js               # ScriptManager resolver
+├── jest.config.js         # Jest configuration
+├── nativewind.css         # Nativewind config
+├── package.json           # Project dependencies
+├── package.json           # Project dependencies
+├── react-native.config.js # Custom configuration for React Native CLI
+├── rspack.config.mjs      # Re.Pack + Rspack config
+├── tailwind.config.cjs    # Tailwind config
+└── tsconfig.json          # TypeScript configuration file
 ```
 
-## Step 2: Build and run your app
+## Prerequisites
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- Node.js ≥ 18, PNPM ≥ 8
+- Android Studio / Xcode with React Native toolchain
+- Java 17 (Android Gradle plugin requirement)
+- Cursor (AI code editor)
 
-### Android
+Install dependencies:
 
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+pnpm install
 ```
 
-### iOS
+## Development Workflow
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+1. **Start Re.Pack dev server**
+   ```bash
+   pnpm start
+   ```
+2. **Launch Android**
+   ```bash
+   pnpm android
+   ```
+   or open the native project in Android Studio / Xcode.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+In dev mode `ScriptManager` always serves chunks from the running Rspack server, so the remote bundles in `build/` are not required.
 
-```sh
-bundle install
+## Production Bundles
+
+Generate production JS artifacts (host + remotes):
+
+```bash
+pnpm build:android
 ```
 
-Then, and every time you update your native dependencies, run:
+Outputs land in `build/output/android/`
 
-```sh
-bundle exec pod install
-```
+### Publishing Remote Mini Apps
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+1. Upload each chunk bundle (and optional `.map`) to your CDN/edge.
+2. Update `index.js` resolver:
+   ```js
+   url: Script.getRemoteURL(`https://cdn.your-domain.com/repack/${remotePath}`);
+   ```
+3. Rebuild native release binaries so they reference the new URL.
 
-```sh
-# Using npm
-npm run ios
+If you want to embed remotes locally instead of fetching from the network, swap the resolver to `Script.getFileSystemURL`.
 
-# OR using Yarn
-yarn ios
-```
+## Building the APK / AAB
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+1. Create a keystore and add credentials to `android/gradle.properties`.
+2. Wire signing info in `android/app/build.gradle`.
+3. Assemble release:
+   ```bash
+   pnpm android:apk   # app-release.apk
+   ```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+⚠️ The release build expects those remote bundles to be reachable at the URL you configure; otherwise mini apps will fail to load.
 
-## Step 3: Modify your app
+## How Code-Splitting Works Here
 
-Now that you have successfully run the app, let's make changes!
+1. `Profile` screen import mini app with `React.lazy` and chunk names.
+2. When a user taps a mini app tile, Suspense triggers loading of that chunk.
+3. `ScriptManager` resolves the request:
+   - Dev → fetch from local Rspack server.
+   - Prod → fetch from CDN path.
+4. Chunk executes, exporting the React component that renders inside `Profile`.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Troubleshooting
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- “property is not configurable” in production: ensure React/React Native are marked as shared singletons (`rspack.config.mjs` handles this).
+- Suspense fallback never resolves in release builds: check the resolver URL and CDN deployment of remote bundles.
+- Animated worklets fail: verify the `ReanimatedPlugin` is enabled in the config.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Useful Commands
 
-## Congratulations! :tada:
+| Command                     | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| `pnpm start`                | Launch Re.Pack dev server (in RepackApp)    |
+| `pnpm android` / `pnpm ios` | Run native apps in debug mode               |
+| `pnpm android:build`        | Emit production JS bundles (host + remotes) |
+| `pnpm build:apk`            | Build signed Android APK                    |
 
-You've successfully run and modified your React Native App. :partying_face:
+## References
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [Re.Pack Documentation](https://re-pack.dev/docs/getting-started/quick-start)
+- [Module Federation across Platforms](https://v4.re-pack.dev/docs/module-federation)
+- [React Native](https://reactnative.dev/)
