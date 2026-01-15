@@ -20,11 +20,20 @@ ScriptManager.shared.addResolver(async scriptId => {
   // Module Federation automatically resolves remote modules via rspack config
   // Resolver này chỉ dùng cho dynamic script loading (nếu có)
 
+  console.log('scriptId url--------------', Script.getDevServerURL(scriptId));
   // In dev mode, resolve script location to dev server.
   if (__DEV__) {
     return {
       url: Script.getDevServerURL(scriptId),
       cache: false,
+    };
+  }
+
+  if (scriptId && scriptId === 'ProfileRemote') {
+    return {
+      url: __DEV__
+        ? 'http://localhost:9002/ProfileRemote.container.js'
+        : 'assets:///profile/ProfileRemote.container.js',
     };
   }
 
@@ -34,9 +43,5 @@ ScriptManager.shared.addResolver(async scriptId => {
     ),
   };
 });
-
-console.log(
-  '[ScriptManager] Resolver registered (will only run when ScriptManager.loadScript() is called)',
-);
 
 AppRegistry.registerComponent(appName, () => App);

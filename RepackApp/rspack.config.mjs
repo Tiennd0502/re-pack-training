@@ -39,16 +39,38 @@ const config = (envConfig, _argv) => {
 	const remotes =
 	mode === 'development'
 		? {
-			  ProfileRemote: `ProfileRemote@http://localhost:9002/${platform}/ProfileRemote.bundle`,
+			ProfileRemote: `ProfileRemote@http://localhost:9002/${platform}/ProfileRemote.container.js.bundle`,
 			}
 		: {
-			  ProfileRemote: `ProfileRemote@http://10.0.2.2:9002/ProfileRemote.bundle?platform=android&dev=true`,
+			  // ProfileRemote: `ProfileRemote@assets:///profile/ProfileRemote.bundle`,
+			  ProfileRemote: 'ProfileRemote@file:///android_asset/profile/ProfileRemote.bundle',
 			};
+
+		// 	"remotes": [
+    // {
+    //   "alias": "ProfileRemote",
+    //   "consumingFederationContainerName": "RepackApp",
+    //   "federationContainerName": "ProfileRemote",
+    //   "moduleName": "Profile",
+    //   "usedIn": [
+    //     "src/navigation/TabStack.tsx"
+    //   ],
+    //   "entry": "http://localhost:9002/android/ProfileRemote.bundle"
+    // }
+	// 	"remotes": [
+  //   {
+  //     "federationContainerName": "ProfileRemote",
+  //     "moduleName": "Profile",
+  //     "alias": "ProfileRemote",
+  //     "entry": "http://localhost:9002/android/ProfileRemote.bundle"
+  //   }
+  // ],
 
 	return Repack.defineRspackConfig({
 		mode,
 		context: __dirname,
 		entry: './index.js',
+		cache: false,
 		resolve: {
 			...Repack.getResolveOptions(),
 			alias: {
@@ -60,11 +82,6 @@ const config = (envConfig, _argv) => {
 				'@/themes': path.resolve(process.cwd(), 'src/themes'),
 			},
 		},
-		output: {
-      path: path.join(__dirname, 'build/output', platform),
-      filename: 'index.bundle',
-      chunkFilename: '[name].chunk.bundle',
-    },
 		module: {
 			rules: [
 				{
@@ -90,9 +107,6 @@ const config = (envConfig, _argv) => {
 				...Repack.getAssetTransformRules(),
 			],
 		},
-		devServer: {
-      remoteResolver: true,
-    },
 		ignoreWarnings: [
 			{
 				module: /react-native-worklets/,
@@ -106,24 +120,25 @@ const config = (envConfig, _argv) => {
 			new ReanimatedPlugin({
 				unstable_disableTransform: true,
 			}),
-			new Repack.RepackPlugin({
-				mode,
-				context: __dirname,
-				entry: './index.js',
-        platform,
+			new Repack.RepackPlugin(),
+			// new Repack.RepackPlugin({
+				// mode,
+				// context: __dirname,
+				// entry: './index.js',
+        // platform,
 				// Each mini app is emitted as a remote bundle under /build/output/<platform>/remotes.
-        extraChunks: [
-          {
-            test: /^ProfileRemote.*$/,
-            type: 'remote',
-            outputPath: path.join(
-              'build/outputs',
-              platform,
-              'remotes/ProfileRemote',
-            ),
-          },
-				],
-			}),
+        // extraChunks: [
+        //   {
+        //     test: /^ProfileRemote.*$/,
+        //     type: 'remote',
+        //     outputPath: path.join(
+        //       'build/outputs',
+        //       platform,
+        //       'remotes/ProfileRemote',
+        //     ),
+        //   },
+				// ],
+			// }),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'RepackApp',
 				dts: false,
@@ -161,7 +176,6 @@ const config = (envConfig, _argv) => {
           },
         },
 			}),
-
 		],
 	})
 }

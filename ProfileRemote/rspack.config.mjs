@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as Repack from '@callstack/repack';
+// import {withZephyr} from 'zephyr-repack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,21 +13,6 @@ const config = (env, _argv) => {
 		mode,
     context: __dirname,
 		entry: './index.js',
-		devServer: {
-			port: 9002,
-			host: '0.0.0.0',
-			static: {
-				directory: path.resolve(__dirname, 'build/output/android'),
-			},
-			devMiddleware: {
-				writeToDisk: true,
-			},
-    },
-		output: {
-			publicPath: 'http://10.0.2.2:9002/',
-			filename: '[name].bundle',
-			chunkFilename: '[name].chunk.bundle',
-		},
 		resolve: {
 			...Repack.getResolveOptions(),
 		},
@@ -59,7 +45,7 @@ const config = (env, _argv) => {
 			new Repack.RepackPlugin(),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'ProfileRemote',
-				filename: 'ProfileRemote.bundle',
+				filename: 'ProfileRemote.container.js.bundle',
 				exposes: {
 					'./Profile': './src/module/Profile/index.tsx',
 				},

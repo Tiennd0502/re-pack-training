@@ -5,8 +5,9 @@
   "scripts": {
     "android": "react-native run-android --port 8082",
     "ios": "react-native run-ios --port 8082",
-    "bundle:android": "react-native bundle --platform android --entry-file index.js --dev true --minify true",
-    "build:android": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
+    "android:clean": "cd android && ./gradlew clean",
+    "android:apk": "cd android && ./gradlew assembleRelease",
+    "android:build": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false",
     "lint": "eslint .",
     "start": "react-native start --port 8082",
     "mf:start": "npx react-native webpack-start --platform android --port 9002",
@@ -16,8 +17,8 @@
     "@module-federation/enhanced": "^0.22.1",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "react": "19.1.0",
-    "react-hook-form": "7.71.0",
     "react-native": "0.81.5",
+    "react-native-safe-area-context": "^5.6.2",
     "react-native-svg": "^15.15.1"
   },
   "devDependencies": {
@@ -44,7 +45,8 @@
     "prettier": "2.8.8",
     "react-native-svg-transformer": "^1.5.2",
     "react-test-renderer": "19.1.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zephyr-repack-plugin": "^0.1.3"
   },
   "engines": {
     "node": ">=20"
