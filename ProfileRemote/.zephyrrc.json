@@ -1,0 +1,12 @@
+{
+  "name": "ProfileRemote",
+  "version": "0.0.1",
+  "platforms": ["android", "ios"],
+  "build": {
+    "command": "npm run android:build",
+    "output": "build"
+  },
+  "deploy": {
+    "environments": ["development", "staging", "production"]
+  }
+}

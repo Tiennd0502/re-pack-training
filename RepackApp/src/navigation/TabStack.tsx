@@ -1,6 +1,5 @@
-import { lazy, ReactNode, Suspense, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import {
-  ActivityIndicator,
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -15,19 +14,12 @@ import { SCREENS, TabBarIcon } from '@/interfaces/navigation';
 
 // Screens || Stack
 import HomeScreen from '@/screens/Home';
+import ProfileScreen from '@/screens/Profile';
 import { useTheme } from '@/hooks/useTheme';
 
 // Components
 import HomeIcon from '@/components/Icons/HomeIcon';
 import UserIcon from '@/components/Icons/UserIcon';
-
-const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'));
-
-const ProfileScreen = () => (
-  <Suspense fallback={<ActivityIndicator />}>
-    <ProfileRemoteComponent />
-  </Suspense>
-);
 
 const Tabs = createBottomTabNavigator();
 

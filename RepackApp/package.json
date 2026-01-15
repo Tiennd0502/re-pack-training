@@ -3,17 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "start": "react-native start --port 8081",
     "android": "react-native run-android --port 8081",
     "ios": "react-native run-ios --port 8081",
+    "android:start": "react-native start --platform android --port 8081",
     "android:clean": "cd android && ./gradlew clean",
     "android:apk": "cd android && ./gradlew assembleRelease",
     "android:build": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
+    "deploy:android": "pnpm android:build && pnpm exec zephyr deploy",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "prepare": "cd .. && husky ./RepackApp/.husky",
-    "start": "react-native start",
-    "start:webpack": "npx react-native webpack-start --port 8081 --platform android",
     "test": "jest"
   },
   "dependencies": {

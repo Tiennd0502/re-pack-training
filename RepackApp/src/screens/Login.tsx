@@ -66,7 +66,6 @@ const LoginScreen = () => {
       mutate(data, {
         onSuccess: async (users: User[]) => {
           if (users?.length) {
-            console.log('users----', users);
             setUser(users?.[0] ?? null);
             setIsAuthenticated(true);
             reset();

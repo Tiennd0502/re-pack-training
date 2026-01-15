@@ -6,6 +6,8 @@ import { NativeWindPlugin } from '@callstack/repack-plugin-nativewind';
 import { ReanimatedPlugin } from '@callstack/repack-plugin-reanimated';
 import { DefinePlugin } from '@rspack/core';
 
+// import { withZephyr } from 'zephyr-repack-plugin';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -40,31 +42,10 @@ const config = (envConfig, _argv) => {
 	mode === 'development'
 		? {
 			ProfileRemote: `ProfileRemote@http://localhost:9002/${platform}/ProfileRemote.container.js.bundle`,
-			}
-		: {
-			  // ProfileRemote: `ProfileRemote@assets:///profile/ProfileRemote.bundle`,
-			  ProfileRemote: 'ProfileRemote@file:///android_asset/profile/ProfileRemote.bundle',
+		} : {
+			  // ProfileRemote: 'ProfileRemote@file:///android_asset/profile/ProfileRemote.container.js.bundle',
+			  ProfileRemote: 'ProfileRemote@https://nguy-n-danh-ti-n-2-profileremote-re-pack-training-7c5b2ceda-ze.zephyrcloud.app/ProfileRemote.container.js.bundle',
 			};
-
-		// 	"remotes": [
-    // {
-    //   "alias": "ProfileRemote",
-    //   "consumingFederationContainerName": "RepackApp",
-    //   "federationContainerName": "ProfileRemote",
-    //   "moduleName": "Profile",
-    //   "usedIn": [
-    //     "src/navigation/TabStack.tsx"
-    //   ],
-    //   "entry": "http://localhost:9002/android/ProfileRemote.bundle"
-    // }
-	// 	"remotes": [
-  //   {
-  //     "federationContainerName": "ProfileRemote",
-  //     "moduleName": "Profile",
-  //     "alias": "ProfileRemote",
-  //     "entry": "http://localhost:9002/android/ProfileRemote.bundle"
-  //   }
-  // ],
 
 	return Repack.defineRspackConfig({
 		mode,
@@ -121,24 +102,6 @@ const config = (envConfig, _argv) => {
 				unstable_disableTransform: true,
 			}),
 			new Repack.RepackPlugin(),
-			// new Repack.RepackPlugin({
-				// mode,
-				// context: __dirname,
-				// entry: './index.js',
-        // platform,
-				// Each mini app is emitted as a remote bundle under /build/output/<platform>/remotes.
-        // extraChunks: [
-        //   {
-        //     test: /^ProfileRemote.*$/,
-        //     type: 'remote',
-        //     outputPath: path.join(
-        //       'build/outputs',
-        //       platform,
-        //       'remotes/ProfileRemote',
-        //     ),
-        //   },
-				// ],
-			// }),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'RepackApp',
 				dts: false,
@@ -173,11 +136,12 @@ const config = (envConfig, _argv) => {
             eager: true,
             requiredVersion: false,
             strictVersion: false,
-          },
+          }
         },
 			}),
 		],
 	})
 }
 
+// export default withZephyr(config);
 export default config;

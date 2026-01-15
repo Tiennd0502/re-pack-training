@@ -1,5 +1,13 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { Suspense, lazy, Component, ErrorInfo, ReactNode } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
+
+// Interfaces
+import { SCREENS } from '@/interfaces/navigation';
+
+// Hooks | Stores
+import { useTheme } from '@/hooks/useTheme';
+import { useUserStore } from '@/stores/user';
 
 const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'));
 
@@ -29,27 +37,13 @@ class ProfileRemoteErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: 'bold',
-              marginBottom: 10,
-              color: '#ff0000',
-            }}
-          >
+        <View className="flex-1 justify-center items-center p-4">
+          <Text className="text-xl font-bold mb-2 text-error">
             Failed to load ProfileRemote
           </Text>
           {this.state.error && (
-            <Text style={{ fontSize: 12, color: '#999', textAlign: 'center' }}>
-              Error: {this.state.error.message}
+            <Text className="text-sm text-gray-500 text-center">
+              Error: {this.state.error?.message}
             </Text>
           )}
         </View>
@@ -60,25 +54,34 @@ class ProfileRemoteErrorBoundary extends Component<
   }
 }
 
-const ProfileRemote: React.FC<ProfileRemoteProps> = props => {
+const ProfileScreen: React.FC<ProfileRemoteProps> = props => {
+  const navigation = useNavigation<NavigationProp<any>>();
+
+  const { theme } = useTheme();
+  const user = useUserStore(state => state.user);
+
+  if (!user) {
+    navigation.navigate(SCREENS.LOGIN);
+  }
+
   return (
     <ProfileRemoteErrorBoundary>
       <Suspense
         fallback={
-          <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-          >
-            <ActivityIndicator size="large" color="#007AFF" />
-            <Text style={{ marginTop: 10, color: '#666' }}>
-              Loading Profile...
-            </Text>
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color={theme.info} />
+            <Text className="mt-2 text-gray-500">Loading Profile...</Text>
           </View>
         }
       >
-        <ProfileRemoteComponent {...props} />
+        <ProfileRemoteComponent
+          {...props}
+          userName={user?.name}
+          userEmail={user?.email}
+        />
       </Suspense>
     </ProfileRemoteErrorBoundary>
   );
 };
 
-export default ProfileRemote;
+export default ProfileScreen;

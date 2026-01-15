@@ -7,7 +7,7 @@
     "ios": "react-native run-ios --port 8082",
     "android:clean": "cd android && ./gradlew clean",
     "android:apk": "cd android && ./gradlew assembleRelease",
-    "android:build": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false",
+    "android:build": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
     "lint": "eslint .",
     "start": "react-native start --port 8082",
     "mf:start": "npx react-native webpack-start --platform android --port 9002",
