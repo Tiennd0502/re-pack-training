@@ -1,0 +1,22 @@
+module.exports = {
+  root: true,
+  extends: '@react-native',
+  ignorePatterns: [
+    'index.js',
+    '*.config.js',
+    '*.config.mjs',
+    '*.config.cjs',
+    '.eslintrc.*',
+    'babel.config.*',
+    'metro.config.*',
+    'jest.config.*',
+    'tailwind.config.*',
+    'rspack.config.*',
+    'react-native.config.*',
+    'node_modules/',
+    'android/',
+    'ios/',
+    'build/',
+    'dist/',
+  ],
+};

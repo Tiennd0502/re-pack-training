@@ -1,0 +1,15 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-native",
+    "paths": {
+      "@/*": ["src/*"],
+      "@repo/ui": ["../../packages/ui/src"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/interfaces": ["../../packages/interfaces/src"],
+      "@repo/interfaces/*": ["../../packages/interfaces/src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

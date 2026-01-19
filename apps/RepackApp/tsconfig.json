@@ -1,0 +1,30 @@
+{
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-native",
+    "paths": {
+      "@/*": ["src/*"],
+      "@repo/constants": ["../../packages/constants/src"],
+      "@repo/constants/*": ["../../packages/constants/src/*"],
+      "@repo/hooks": ["../../packages/hooks/src"],
+      "@repo/hooks/*": ["../../packages/hooks/src/*"],
+      "@repo/interfaces": ["../../packages/interfaces/src"],
+      "@repo/interfaces/*": ["../../packages/interfaces/src/*"],
+      "@repo/providers": ["../../packages/providers/src"],
+      "@repo/providers/*": ["../../packages/providers/src/*"],
+      "@repo/services": ["../../packages/services/src"],
+      "@repo/services/*": ["../../packages/services/src/*"],
+      "@repo/stores": ["../../packages/stores/src"],
+      "@repo/stores/*": ["../../packages/stores/src/*"],
+      "@repo/ui": ["../../packages/ui/src"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/utils": ["../../packages/utils/src"],
+      "@repo/utils/*": ["../../packages/utils/src/*"],
+      "ProfileRemote/Profile": [
+        "../../packages/interfaces/src/remotes/profile.d.ts"
+      ]
+    }
+  }
+}

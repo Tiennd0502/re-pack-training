@@ -1,0 +1,20 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@repo/constants": ["../constants/src"],
+      "@repo/constants/*": ["../constants/src/*"],
+      "@repo/interfaces": ["../interfaces/src"],
+      "@repo/interfaces/*": ["../interfaces/src/*"],
+      "@repo/hooks": ["../hooks/src"],
+      "@repo/hooks/*": ["../hooks/src/*"],
+      "@repo/utils": ["../utils/src"],
+      "@repo/utils/*": ["../utils/src/*"]
+    }
+  },
+  "include": ["src", "nativewind-env.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

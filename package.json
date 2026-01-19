@@ -1,0 +1,35 @@
+{
+  "name": "RepackApp",
+  "private": true,
+  "scripts": {
+    "setup": "pnpm install",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:android": "turbo run dev --filter=ProfileRemote",
+    "dev:android:run": "pnpm run dev:android & sleep 8 && cd apps/ProfileRemote && pnpm run android",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4",
+    "turbo": "^2.7.5",
+    "typescript": "5.9.2",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}
