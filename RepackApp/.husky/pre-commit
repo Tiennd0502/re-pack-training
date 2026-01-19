@@ -1,3 +1,0 @@
-cd RepackApp
-
-pnpm lint-staged

@@ -1,126 +1,156 @@
-# React Native Micro-Frontend with Re.Pack
+# Turborepo starter
 
-A React Native micro-frontend architecture demonstration using **Re.Pack** builder and **React Native CLI**. This repo contains a host application (`RepackApp`) that dynamically loads remote mini-apps (`Profile`) using Module Federation.
-
-## Project Structure
-
-```
-re-pack-training/
-├── RepackApp/               # Host application (shell)
-│   ├── src/
-│   │   ├── App.tsx          # Main host app entry
-│   │   ├── screens/         # Host UI screens
-│   │   └── components/      # Shared components
-│   ├── index.js             # ScriptManager resolver
-│   └── rspack.config.mjs
-│
-└── ProfileRemote/            # Remote mini-app
-    ├── src/module/Profile/
-    └── rspack.config.mjs
-```
-
-## Features
-
-- **Code-splitting** via `React.lazy` + Suspense
-- **Remote mini-apps** shipped as standalone bundles
-- **Module Federation** for dynamic loading
-- **Shared React/React Native singletons** to avoid duplicate runtimes
-- **Re.Pack builder** with Rspack for fast builds
-- **React Native CLI** (not Expo) for native development
-- **Apply UI framework Nativewind** 
-
-## Prerequisites
-
-- **Node.js** ≥ 20
-- **PNPM** ≥ 7.32.2
-- **Android Studio** / **Xcode** with React Native toolchain
-- **Java 17** (required for Android Gradle plugin)
-- **Cursor**(AI code editor)
+This Turborepo starter is maintained by the Turborepo core team.
 
 ## Installation
 
-Install dependencies for all projects:
+Install all dependencies for the monorepo:
 
-```bash
-# Clone the repository
-git clone -b feature/flux-store git@gitlab.asoft-python.com:tien.nguyen/re-pack-training.git
-
-# Move to folder
-cd re-pack-training
-
-# Install dependencies for host app
-cd RepackApp
+```sh
 pnpm install
-
-# Install dependencies for each mini-app
-cd ProfileRemote && pnpm install
 ```
 
-## Development Workflow
+Or use the setup script:
 
-### 1. Start the Host App (RepackApp)
-
-```bash
-cd RepackApp
-
-# Start Re.Pack dev server
-pnpm start
-
-# In another terminal, launch Android
-pnpm android
-
-# Or launch iOS
-pnpm ios
+```sh
+pnpm run setup
 ```
 
-### 2. Build Mini-Apps (Optional - for standalone testing)
+## Using this example
 
-Each mini-app can be built independently:
+Run the following command:
+
+```sh
+npx create-turbo@latest
+```
+
+## What's inside?
+
+This Turborepo includes the following packages/apps:
+
+### Apps and Packages
+
+- `ProfileRemote`: a React Native app using Re.Pack with Rspack and Module Federation
+- `@repo/ui`: a React component library
+- `@repo/eslint-config`: `eslint` configurations
+- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Utilities
+
+This Turborepo has some additional tools already setup for you:
+
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
+
+### Build
+
+To build all apps and packages, run the following command:
+
+```
+cd my-turborepo
+
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build
+yarn dlx turbo build
+pnpm exec turbo build
+```
+
+You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+
+```
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build --filter=ProfileRemote
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build --filter=ProfileRemote
+yarn exec turbo build --filter=ProfileRemote
+pnpm exec turbo build --filter=ProfileRemote
+```
+
+### Develop
+
+To develop all apps and packages, run the following command:
+
+```
+cd my-turborepo
+
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev
+yarn exec turbo dev
+pnpm exec turbo dev
+```
+
+You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+
+```
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev --filter=ProfileRemote
+
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev --filter=ProfileRemote
+yarn exec turbo dev --filter=ProfileRemote
+pnpm exec turbo dev --filter=ProfileRemote
+```
+
+### Run Android for ProfileRemote
+
+To start the dev server and run Android:
 
 ```bash
-# Build ProfileRemote mini-app
-cd ProfileRemote
-pnpm build:android
+pnpm run dev:android:run
+```
 
-### Building Native Release Binaries
+### Remote Caching
 
-#### Android (APK / AAB)
+> [!TIP]
+> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
 
-1. Create a keystore and add credentials to `RepackApp/android/gradle.properties`
-2. Configure signing in `RepackApp/android/app/build.gradle`
-3. Assemble release:
-   
-  cd RepackApp
-  pnpm android:apk   # app-release.apk
+Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
 
-⚠️ **Note**: Release builds expect remote bundles to be reachable at the configured URL; otherwise mini-apps will fail to load.
+```
+cd my-turborepo
 
-## How It Works
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo login
 
-1. **Host App** (`RepackApp`) imports mini-apps using `React.lazy` with chunk names
-2. When a user interacts with a mini-app tile, **Suspense** triggers loading of that chunk
-3. Chunk executes and exports the React component that renders inside the host
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo login
+yarn exec turbo login
+pnpm exec turbo login
+```
 
-## Troubleshooting
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
 
-- **"property is not configurable" in production**: Ensure React/React Native are marked as shared singletons in `rspack.config.mjs`
-- **Suspense fallback never resolves in release builds**: Check the resolver URL and CDN deployment of remote bundles
-- **Animated worklets fail**: Verify the `ReanimatedPlugin` is enabled in the Rspack config
-- **"undefined is not a function" during JSX rendering**: Do not wrap the host configuration with `withZephyr()` like `withZephyr()(config)`. This will automatically deploy the host and use local chunks deployed on Zephyr, which is not intended for release mode. Only use `withZephyr` for remote mini-app configurations, not the host app.
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-## Useful Commands
+```
+# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
+turbo link
 
-| Command                      | Description                                 |
-| ---------------------------- | ------------------------------------------- |
-| `pnpm start`                 | Launch Re.Pack dev server (in RepackApp)    |
-| `pnpm android` / `pnpm ios`  | Run native apps in debug mode               |
-| `pnpm build:android`         | Emit production JS bundles (host + remotes) |
-| `pnpm build:apk`             | Build signed Android APK                    |
+# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
+npx turbo link
+yarn exec turbo link
+pnpm exec turbo link
+```
 
-## References
+## Useful Links
 
-- [Re.Pack Documentation](https://re-pack.dev/docs/getting-started/quick-start)
-- [Module Federation across Platforms](https://v4.re-pack.dev/docs/module-federation)
-- [React Native CLI](https://reactnative.dev/docs/environment-setup)
-- [Rspack Documentation](https://rspack.dev/)
+Learn more about the power of Turborepo:
+
+- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
+- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
+- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
+- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
+- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
+- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
