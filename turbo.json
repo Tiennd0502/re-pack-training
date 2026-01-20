@@ -14,10 +14,23 @@
       "dependsOn": ["^check-types"]
     },
     "dev": {
+      "dependsOn": ["^dev:repack", "^dev:profile"],
       "cache": false,
       "persistent": true
     },
-    "dev:android": {
+    "dev:repack": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev:profile": {
+      "cache": false,
+      "persistent": true
+    },
+    "build:apk": {
+      "cache": false,
+      "persistent": true
+    },
+    "build:bundle": {
       "cache": false,
       "persistent": true
     }

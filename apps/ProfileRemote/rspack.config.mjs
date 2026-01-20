@@ -17,8 +17,6 @@ const config = (envConfig) => {
     mode,
     context: __dirname,
     entry: './index.js',
-    
-    // Optimization: minify chỉ trong production
     optimization: {
       minimize: mode === 'production',
       chunkIds: mode === 'production' ? 'deterministic' : 'named',
@@ -28,6 +26,7 @@ const config = (envConfig) => {
       ...Repack.getResolveOptions(),
       alias: {
 				'@': path.resolve(process.cwd(), 'src'),
+        '@css': path.resolve(__dirname, '../../nativewind.css'),
         '@repo/constants': path.resolve(__dirname, '../../packages/constants/src'),
 				'@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
 				'@repo/interfaces': path.resolve(__dirname, '../../packages/interfaces/src'),
@@ -105,14 +104,18 @@ const config = (envConfig) => {
             singleton: true,
             eager: true,
           },
+					'react-native-svg': {
+						singleton: true,
+						eager: true,
+					},
           ...(mode === 'development'
-						? {
-								'react/jsx-dev-runtime': {
-									singleton: true,
-									eager: true,
-								},
-							}
-						: {}),
+            ? {
+                'react/jsx-dev-runtime': {
+                  singleton: true,
+                  eager: true,
+                },
+              }
+            : {}),
         },
       }),
     ],

@@ -18,7 +18,7 @@ const ProfileItem = ({ icon, title, onPress }: ProfileItemProps) => {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <View className="flex-row items-center align-middle justify-between py-5">
-        {icon}
+        <View className="w-[20px] justify-center items-center">{icon}</View>
         <View className="ml-[10px]">
           <Text>{title}</Text>
         </View>
