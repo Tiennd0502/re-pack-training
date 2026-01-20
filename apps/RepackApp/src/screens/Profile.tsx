@@ -7,7 +7,7 @@ import {
   ReactNode,
   useCallback,
 } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 
 // Interfaces
 import { SCREENS } from '@/interfaces/navigation';
@@ -17,6 +17,11 @@ import { useTheme } from '@repo/hooks/useTheme';
 import { useUserStore } from '@repo/stores/user';
 import { useAuthStore } from '@repo/stores/auth';
 
+// Components
+import MainLayout from '@/components/MainLayout';
+
+// const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'))
+
 const ProfileRemoteComponent = lazy(() =>
   import('ProfileRemote/Profile')
     .then(module => {
@@ -25,7 +30,18 @@ const ProfileRemoteComponent = lazy(() =>
     })
     .catch(error => {
       console.error('[ProfileRemote] Error loading module:', error);
-      throw error;
+      return {
+        default: () => (
+          <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size="large" color="red" />
+            <Text className="mt-2 text-gray-500">Loading Profile...</Text>
+            <Text className="mt-2 text-gray-500">Error: {error.message}</Text>
+            <Text className="mt-10 text-red-500">
+              Error: {JSON.stringify(error)}
+            </Text>
+          </View>
+        ),
+      };
     }),
 );
 
@@ -90,23 +106,27 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = props => {
   }, [setIsAuthenticated]);
 
   return (
-    <ProfileRemoteErrorBoundary>
-      <Suspense
-        fallback={
-          <View className="flex-1 justify-center items-center">
-            <ActivityIndicator size="large" color={theme.info} />
-            <Text className="mt-2 text-gray-500">Loading Profile...</Text>
-          </View>
-        }
-      >
-        <ProfileRemoteComponent
-          {...props}
-          userName={user?.name}
-          userEmail={user?.email}
-          onLogout={handleGoToLogout}
-        />
-      </Suspense>
-    </ProfileRemoteErrorBoundary>
+    <MainLayout>
+      <ScrollView>
+        <ProfileRemoteErrorBoundary>
+          <Suspense
+            fallback={
+              <View className="flex-1 justify-center items-center">
+                <ActivityIndicator size="large" color={theme.info} />
+                <Text className="mt-2 text-gray-500">Loading Profile...</Text>
+              </View>
+            }
+          >
+            <ProfileRemoteComponent
+              {...props}
+              userName={user?.name}
+              userEmail={user?.email}
+              onLogout={handleGoToLogout}
+            />
+          </Suspense>
+        </ProfileRemoteErrorBoundary>
+      </ScrollView>
+    </MainLayout>
   );
 };
 

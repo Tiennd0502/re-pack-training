@@ -116,7 +116,10 @@ const config = (envConfig, _argv) => {
 				name: 'RepackApp',
 				dts: false,
 				remotes: {
-					ProfileRemote: `ProfileRemote@${env.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+					ProfileRemote: `ProfileRemote@https://nguy-n-danh-ti-n-430-profileremote-re-pack-traini-144eb2b2a-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
+					// ProfileRemote: `ProfileRemote@${env.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+					// ProfileRemote: `ProfileRemote@https://nguy-n-danh-ti-n-358-profileremote-re-pack-traini-e8a02cc07-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
+					
 				},
 				runtimePlugins: [
 					'@callstack/repack/mf/core-plugin',
@@ -127,6 +130,7 @@ const config = (envConfig, _argv) => {
 					react: { singleton: true, eager: true },
 					'react-native': { singleton: true, eager: true },
 					'react/jsx-runtime': { singleton: true, eager: true },
+					'react-native-svg': { singleton: true, eager: true },
 					...(mode === 'development'
 						? {
 								'react/jsx-dev-runtime': {
