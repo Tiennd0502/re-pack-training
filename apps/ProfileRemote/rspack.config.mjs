@@ -71,10 +71,10 @@ const config = (envConfig) => {
 			new IgnorePlugin({
         resourceRegExp: /^@react-native-masked-view/,
       }),
-			new Repack.plugins.HermesBytecodePlugin({
-				enabled: mode === 'production',
-				test: /\.bundle$/,
-			}),
+			// new Repack.plugins.HermesBytecodePlugin({
+			// 	enabled: mode === 'production',
+			// 	test: /\.bundle$/,
+			// }),
       new Repack.plugins.ModuleFederationPluginV2({
         name: 'ProfileRemote',
         filename: 'ProfileRemote.container.js.bundle',

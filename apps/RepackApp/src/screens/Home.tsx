@@ -9,12 +9,13 @@ import { Product } from '@repo/interfaces/product';
 
 // Constants
 import { INIT_PAGE } from '@repo/constants/common';
+import { Banners } from '@repo/constants/images';
 
 // Hooks
 import { useProducts } from '@repo/hooks/useProducts';
 
 // Utils
-import { getData } from '@/utils/common';
+import { getData } from '@repo/utils/common';
 
 // Component
 import MainLayout from '@/components/MainLayout';
@@ -27,9 +28,6 @@ import Button from '@repo/ui/components/Button';
 import ProductList from '@repo/ui/components/ProductList';
 import { ProductCardType } from '@repo/ui/components/ProductCard';
 import PromoBanner, { PromoBannerType } from '@repo/ui/components/PromoBanner';
-
-// Themes
-import { Banners } from '@/themes/images';
 
 const CATEGORIES: Category[] = [
   {

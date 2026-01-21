@@ -1,4 +1,3 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import {
   Suspense,
   lazy,
@@ -8,9 +7,6 @@ import {
   useCallback,
 } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
-
-// Interfaces
-import { SCREENS } from '@/interfaces/navigation';
 
 // Hooks | Stores
 import { useTheme } from '@repo/hooks/useTheme';
@@ -22,28 +18,28 @@ import MainLayout from '@/components/MainLayout';
 
 // const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'))
 
-const ProfileRemoteComponent = lazy(() =>
-  import('ProfileRemote/Profile')
-    .then(module => {
-      console.log('[ProfileRemote] Module loaded:', module);
-      return { default: module?.default };
-    })
-    .catch(error => {
-      console.error('[ProfileRemote] Error loading module:', error);
-      return {
-        default: () => (
-          <View className="flex-1 justify-center items-center">
-            <ActivityIndicator size="large" color="red" />
-            <Text className="mt-2 text-gray-500">Loading Profile...</Text>
-            <Text className="mt-2 text-gray-500">Error: {error.message}</Text>
-            <Text className="mt-10 text-red-500">
-              Error: {JSON.stringify(error)}
-            </Text>
-          </View>
-        ),
-      };
-    }),
-);
+const ProfileRemoteComponent = lazy(async () => {
+  try {
+    const module = await import('ProfileRemote/Profile');
+    console.log('[ProfileRemote] Module loaded:', module);
+    return { default: module?.default };
+  } catch (error) {
+    console.error('[ProfileRemote] Error loading module:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      default: () => (
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator size="large" color="red" />
+          <Text className="mt-2 text-gray-500">Loading Profile...</Text>
+          <Text className="mt-2 text-gray-500">Error: {errorMessage}</Text>
+          <Text className="mt-10 text-red-500">
+            Error: {JSON.stringify(error)}
+          </Text>
+        </View>
+      ),
+    };
+  }
+});
 
 interface ProfileRemoteProps {
   userName?: string;
@@ -88,16 +84,10 @@ class ProfileRemoteErrorBoundary extends Component<
   }
 }
 
-const ProfileScreen: React.FC<ProfileRemoteProps> = props => {
-  const navigation = useNavigation<NavigationProp<any>>();
-
+const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
   const { theme } = useTheme();
   const user = useUserStore(state => state.user);
   const setIsAuthenticated = useAuthStore(state => state.setIsAuthenticated);
-
-  if (!user) {
-    navigation.navigate(SCREENS.LOGIN);
-  }
 
   const handleGoToLogout = useCallback(async () => {
     await useAuthStore.persist.clearStorage();
@@ -118,7 +108,6 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = props => {
             }
           >
             <ProfileRemoteComponent
-              {...props}
               userName={user?.name}
               userEmail={user?.email}
               onLogout={handleGoToLogout}
