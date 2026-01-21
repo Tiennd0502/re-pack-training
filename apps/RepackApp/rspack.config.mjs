@@ -64,7 +64,6 @@ const config = (envConfig, _argv) => {
 		optimization: {
       minimize: mode === 'production',
       chunkIds: 'named',
-      splitChunks: false,
     },
 		module: {
 			rules: [
@@ -116,9 +115,11 @@ const config = (envConfig, _argv) => {
 				filename: 'RepackApp.container.js.bundle',
 				dts: false,
 				remotes: {
-					// ProfileRemote: `ProfileRemote@https://t-android-latest-nguy-n-danh-ti-n-profileremote-re-pa-a071c1-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
-					// ProfileRemote: `ProfileRemote@${env.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
-					ProfileRemote: `ProfileRemote@https://t-android-feat-update-readme-file-nguy-n-danh-ti-n-pr-2f3b78-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
+					// ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+					// ProfileRemote: `ProfileRemote@https://t-android-feat-flux-store-nguy-n-danh-ti-n-profilerem-976e5f-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
+					ProfileRemote: `ProfileRemote@https://t-android-feat-update-readme-file-nguy-n-danh-ti-n-pr-2f3b78-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
+					// ProfileRemote: `ProfileRemote@http://localhost:9002/${platform}/ProfileRemote.container.js.bundle`
+
 				},
 				runtimePlugins: [
 					'@callstack/repack/mf/core-plugin',
@@ -130,6 +131,12 @@ const config = (envConfig, _argv) => {
 					'react-native': { singleton: true, eager: true },
 					'react/jsx-runtime': { singleton: true, eager: true },
 					'react-native-svg': { singleton: true, eager: true },
+					'nativewind': { singleton: true, eager: true },
+					'react-native-css-interop/': {
+						singleton: true,
+						eager: true,
+						requiredVersion: '*',
+					},
 					...(mode === 'development'
 						? {
 								'react/jsx-dev-runtime': {

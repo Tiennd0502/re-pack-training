@@ -45,8 +45,9 @@ const TabsStack = () => {
       borderColor: theme.secondary,
       backgroundColor: theme.secondary,
       shadowColor: theme.primary,
+      boxShadow: `0px -1px 16px 1px ${theme.senary}`,
     }),
-    [theme.secondary, theme.primary],
+    [theme.secondary, theme.primary, theme.senary],
   );
 
   const renderTabBarButton = useCallback(
@@ -83,18 +84,14 @@ export default TabsStack;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    height: 80,
+    height: 68,
     paddingTop: 12,
     justifyContent: 'center',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     position: 'absolute',
-    bottom: 0,
+    bottom: -1,
     zIndex: 3,
     borderTopWidth: 1,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-    elevation: 16,
   },
 });

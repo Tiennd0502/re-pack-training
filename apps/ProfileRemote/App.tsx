@@ -1,5 +1,3 @@
-import '../../nativewind.css';
-
 import Profile from './src/module/Profile';
 import { StatusBar, useColorScheme, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

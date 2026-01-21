@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 // Constants
 import { ERROR_MESSAGES } from '@repo/constants/message';
@@ -84,78 +83,78 @@ const LoginScreen = () => {
 
   return (
     <MainLayout>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="flex-1 h-full w-full align-center px-6 mt-20">
-          <Text className="text-2xl font-bold mb-4 text-primary">
-            {`Log into\nyour account`}
+      <View className="flex-1 h-full w-full align-center px-6 mt-20">
+        <Text className="text-2xl font-bold mb-4 text-primary">
+          {`Log into\nyour account`}
+        </Text>
+
+        <View className="gap-5 mt-12">
+          <ControllerInput<LoginPayLoad>
+            key="email"
+            disabled={isLoading}
+            name="email"
+            rules={SCHEMA.email}
+            inputRef={fieldRefs.email}
+            nextField="password"
+            control={control}
+            placeholder="Email address"
+            clearError={handleClearErrorMessage}
+            onFocusNextInput={onFocus}
+          />
+
+          <ControllerInput<LoginPayLoad>
+            key="password"
+            disabled={isLoading}
+            name="password"
+            rules={SCHEMA.password}
+            inputRef={fieldRefs.password}
+            control={control}
+            placeholder="Password"
+            secureTextEntry
+            returnKeyType="done"
+            clearError={handleClearErrorMessage}
+          />
+        </View>
+
+        <View className="mt-7 ml-auto mr-0 justify-end items-end">
+          <Button
+            disabled
+            text="Forgot Password?"
+            variant="ghost"
+            textClassName="text-quaternary text-xs"
+            onPress={() => {}}
+          />
+        </View>
+
+        <View className="flex-1 items-center mt-5 gap-6 mb-bottom">
+          {errorMessage && <Text className="text-error">{errorMessage}</Text>}
+          <Button
+            text="Login"
+            className="w-36"
+            isLoading={Boolean(isSubmitting || isPending)}
+            onPress={handleSubmit(handleLogin)}
+          />
+          <Text className="text-primary text-xs font-light">
+            or log in with
           </Text>
-
-          <View className="gap-5 mt-12">
-            <ControllerInput<LoginPayLoad>
-              disabled={isLoading}
-              name="email"
-              rules={SCHEMA.email}
-              inputRef={fieldRefs.email}
-              nextField="password"
-              control={control}
-              placeholder="Email address"
-              clearError={handleClearErrorMessage}
-              onFocusNextInput={onFocus}
-            />
-
-            <ControllerInput<LoginPayLoad>
-              disabled={isLoading}
-              name="password"
-              rules={SCHEMA.password}
-              inputRef={fieldRefs.password}
-              control={control}
-              placeholder="Password"
-              secureTextEntry
-              returnKeyType="done"
-              clearError={handleClearErrorMessage}
-            />
-          </View>
-
-          <View className="mt-7 ml-auto mr-0 justify-end items-end">
-            <Button
-              disabled
-              text="Forgot Password?"
-              variant="ghost"
-              textClassName="text-quaternary text-xs"
-              onPress={() => {}}
-            />
-          </View>
-
-          <View className="flex-1 items-center mt-5 gap-6 mb-bottom">
-            {errorMessage && <Text className="text-error">{errorMessage}</Text>}
-            <Button
-              text="Login"
-              className="w-36"
-              isLoading={Boolean(isSubmitting || isPending)}
-              onPress={handleSubmit(handleLogin)}
-            />
-            <Text className="text-primary text-xs font-light">
-              or log in with
-            </Text>
-            <View className="flex-row gap-5">
-              <AppleIcon />
-              <GoogleIcon />
-              <FacebookIcon />
-            </View>
-          </View>
-
-          <View className="mt-7 mb-0 w-full flex-row items-center justify-between">
-            <Text className="text-primary text-xs">Don't have an account?</Text>
-            <Button
-              disabled
-              text="Sign Up"
-              variant="ghost"
-              textClassName="text-primary text-xs underline"
-              onPress={() => {}}
-            />
+          <View className="flex-row gap-5">
+            <AppleIcon />
+            <GoogleIcon />
+            <FacebookIcon />
           </View>
         </View>
-      </ScrollView>
+
+        <View className="mt-7 mb-0 w-full flex-row items-center justify-between">
+          <Text className="text-primary text-xs">Don't have an account?</Text>
+          <Button
+            disabled
+            text="Sign Up"
+            variant="ghost"
+            textClassName="text-primary text-xs underline"
+            onPress={() => {}}
+          />
+        </View>
+      </View>
     </MainLayout>
   );
 };

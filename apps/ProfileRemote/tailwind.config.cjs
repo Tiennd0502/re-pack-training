@@ -6,6 +6,7 @@ module.exports = {
   content: [
     './App.{js,jsx,ts,tsx}',
     './index.js',
+		'./src/module/Profile/index.tsx',
     './src/**/*.{js,jsx,ts,tsx}',
     '../../packages/ui/src/components/**/*.{js,jsx,ts,tsx}',
   ],

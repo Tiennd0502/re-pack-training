@@ -1,11 +1,4 @@
-import {
-  Suspense,
-  lazy,
-  Component,
-  ErrorInfo,
-  ReactNode,
-  useCallback,
-} from 'react';
+import { Suspense, lazy, Component, ReactNode, useCallback } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 
 // Hooks | Stores
@@ -16,30 +9,7 @@ import { useAuthStore } from '@repo/stores/auth';
 // Components
 import MainLayout from '@/components/MainLayout';
 
-// const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'))
-
-const ProfileRemoteComponent = lazy(async () => {
-  try {
-    const module = await import('ProfileRemote/Profile');
-    console.log('[ProfileRemote] Module loaded:', module);
-    return { default: module?.default };
-  } catch (error) {
-    console.error('[ProfileRemote] Error loading module:', error);
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    return {
-      default: () => (
-        <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color="red" />
-          <Text className="mt-2 text-gray-500">Loading Profile...</Text>
-          <Text className="mt-2 text-gray-500">Error: {errorMessage}</Text>
-          <Text className="mt-10 text-red-500">
-            Error: {JSON.stringify(error)}
-          </Text>
-        </View>
-      ),
-    };
-  }
-});
+const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'));
 
 interface ProfileRemoteProps {
   userName?: string;
@@ -60,16 +30,12 @@ class ProfileRemoteErrorBoundary extends Component<
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[ProfileRemote] Error Boundary caught:', error, errorInfo);
-  }
-
   render() {
     if (this.state.hasError) {
       return (
         <View className="flex-1 justify-center items-center p-4">
           <Text className="text-xl font-bold mb-2 text-error">
-            Failed to load ProfileRemote
+            Failed to load Profile
           </Text>
           {this.state.error && (
             <Text className="text-sm text-gray-500 text-center">
@@ -97,7 +63,10 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
 
   return (
     <MainLayout>
-      <ScrollView>
+      <ScrollView
+        contentContainerClassName="flex-1 w-full"
+        showsVerticalScrollIndicator={false}
+      >
         <ProfileRemoteErrorBoundary>
           <Suspense
             fallback={

@@ -1,6 +1,3 @@
-// Import CSS to ensure styles are available when component is loaded as remote module
-import '@css';
-
 import { View, Text } from 'react-native';
 
 // Components
@@ -48,9 +45,7 @@ const Profile: React.FC<ProfileProps> = ({
             </Text>
           </View>
         </View>
-        <Text className="text-2xl font-bold text-primary mb-1">
-          {userName}12323
-        </Text>
+        <Text className="text-2xl font-bold text-primary mb-1">{userName}</Text>
         <Text className="text-base text-tertiary">{userEmail}</Text>
       </View>
 

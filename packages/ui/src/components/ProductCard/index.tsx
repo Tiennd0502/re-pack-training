@@ -83,7 +83,7 @@ const ProductCard = ({
       default: {
         return {
           width: width,
-          height: 186,
+          height: 200,
         };
       }
     }
@@ -119,8 +119,9 @@ const ProductCard = ({
       twMerge(
         "w-full h-full block object-cover object-center overflow-hidden",
         isTertiaryType ? "-top-1 rounded-md" : "top-0 -left-1",
+        isPrimaryType && "top-0 left-0",
       ),
-    [isTertiaryType],
+    [isTertiaryType, isPrimaryType],
   );
 
   const priceContainerClassName = useMemo(
@@ -157,6 +158,7 @@ const ProductCard = ({
         <Image
           className={imageClassName}
           src={image}
+          style={{ width: imageSize.width, height: imageSize.height }}
           source={{ uri: image }}
           resizeMode="cover"
         />
