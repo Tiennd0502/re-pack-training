@@ -8,10 +8,6 @@ module.exports = {
         root: ['./'],
         alias: {
           '@': './src',
-          '@/hooks': './src/hooks',
-          '@/stores': './src/stores',
-          '@/providers': './src/providers',
-          '@/themes': './src/themes',
           '@repo/constants': '../../packages/constants/src',
           '@repo/hooks': '../../packages/hooks/src',
           '@repo/interfaces': '../../packages/interfaces/src',

@@ -30,7 +30,6 @@ const loadEnv = () => {
 		});
 		return env;
 	} catch (error) {
-		console.warn('No .env file found, using process.env');
 		return {};
 	}
 };
@@ -65,7 +64,7 @@ const config = (envConfig, _argv) => {
 		optimization: {
       minimize: mode === 'production',
       chunkIds: 'named',
-      splitChunks: { chunks: 'async' },
+      splitChunks: false,
     },
 		module: {
 			rules: [
@@ -114,12 +113,12 @@ const config = (envConfig, _argv) => {
 			}),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'RepackApp',
+				filename: 'RepackApp.container.js.bundle',
 				dts: false,
 				remotes: {
-					ProfileRemote: `ProfileRemote@https://nguy-n-danh-ti-n-430-profileremote-re-pack-traini-144eb2b2a-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
+					// ProfileRemote: `ProfileRemote@https://t-android-latest-nguy-n-danh-ti-n-profileremote-re-pa-a071c1-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
 					// ProfileRemote: `ProfileRemote@${env.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
-					// ProfileRemote: `ProfileRemote@https://nguy-n-danh-ti-n-358-profileremote-re-pack-traini-e8a02cc07-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
-					
+					ProfileRemote: `ProfileRemote@https://t-android-feat-update-readme-file-nguy-n-danh-ti-n-pr-2f3b78-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`
 				},
 				runtimePlugins: [
 					'@callstack/repack/mf/core-plugin',
