@@ -59,7 +59,7 @@ const Button = ({
     "flex-row justify-center items-center gap-[15px] rounded-[25px] w-full",
     buttonVariant[variant],
     buttonSize[size],
-    disabled && "opacity-50",
+    disabled && "opacity-75",
     className,
   );
 
