@@ -17,16 +17,12 @@ const config = (envConfig) => {
     mode,
     context: __dirname,
     entry: './index.js',
-    optimization: {
-      minimize: mode === 'production',
-      chunkIds: mode === 'production' ? 'deterministic' : 'named',
-    },
 
     resolve: {
       ...Repack.getResolveOptions(),
       alias: {
 				'@': path.resolve(process.cwd(), 'src'),
-        '@css': path.resolve(__dirname, '../../nativewind.css'),
+				'@css': path.resolve(__dirname, '../../nativewind.css'),
         '@repo/constants': path.resolve(__dirname, '../../packages/constants/src'),
 				'@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
 				'@repo/interfaces': path.resolve(__dirname, '../../packages/interfaces/src'),
@@ -108,6 +104,19 @@ const config = (envConfig) => {
 						singleton: true,
 						eager: true,
 					},
+					'tailwindcss': {
+						singleton: true,
+						eager: true,
+					},
+					'nativewind': {
+						singleton: true,
+						eager: true,
+					},
+					'react-native-css-interop/': {
+						singleton: true,
+						eager: false,
+						requiredVersion: '*',
+					},
           ...(mode === 'development'
             ? {
                 'react/jsx-dev-runtime': {
@@ -125,3 +134,5 @@ const config = (envConfig) => {
 export default withZephyr({
   applicationUid: 'profileremote.re-pack-training.tiennd0502',
 })(config);
+
+// export default config;

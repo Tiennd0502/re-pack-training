@@ -9,5 +9,6 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
     '../../packages/ui/src/components/**/*.{js,jsx,ts,tsx}',
+		'../../apps/ProfileRemote/src/**/*.{js,jsx,ts,tsx}',
   ],
 };

@@ -28,6 +28,8 @@ import Button from '@repo/ui/components/Button';
 import ProductList from '@repo/ui/components/ProductList';
 import { ProductCardType } from '@repo/ui/components/ProductCard';
 import PromoBanner, { PromoBannerType } from '@repo/ui/components/PromoBanner';
+import { SCREENS } from '@/interfaces/navigation';
+import { NavigationProp } from '@react-navigation/native';
 
 const CATEGORIES: Category[] = [
   {
@@ -54,7 +56,7 @@ const CATEGORIES: Category[] = [
 
 const isAndroid = Platform.OS === 'android';
 
-const Home = () => {
+const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const { useFetchProducts } = useProducts();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useFetchProducts(INIT_PAGE);
@@ -68,7 +70,7 @@ const Home = () => {
   const [categoryKey, setCategoryKey] = useState(CATEGORIES[0]);
 
   const containerClassName = twMerge(
-    'flex-1 justify-start mt-10 pb-[${isAndroid ? 130 : 100}px]',
+    'flex-1 w-full h-full justify-start mt-10 pb-[${isAndroid ? 130 : 100}px]',
     isAndroid ? 'pb-[100px]' : 'pb-[80px]',
   );
 
@@ -76,7 +78,9 @@ const Home = () => {
     setCategoryKey(value);
   }, []);
 
-  const handleShowAllProduct = useCallback(() => {}, []);
+  const handleShowAllProduct = useCallback(() => {
+    navigation.navigate(SCREENS.PRODUCTS);
+  }, [navigation]);
 
   const handlePressProduct = useCallback(() => {}, []);
 
@@ -107,12 +111,12 @@ const Home = () => {
               onChange={handleChangeCategory}
             />
 
-            <View className="flex-row justify-between items-center">
+            <View className="w-full flex-row justify-between items-center">
               <Text className="text-2xl font-bold">Feature Products</Text>
               <Button
                 variant="ghost"
                 text="Show all"
-                className="text-sm text-senary"
+                className="text-sm text-senary pr-0 w-auto"
                 onPress={handleShowAllProduct}
               />
             </View>
@@ -140,12 +144,12 @@ const Home = () => {
             />
           </View>
 
-          <View className="flex-row justify-between items-center mt-3 mb-2 px-6">
+          <View className="w-full flex-row justify-between items-center mt-3 mb-2 px-6">
             <Text className="text-2xl font-bold">Recommended</Text>
             <Button
               variant="ghost"
               text="Show all"
-              className="text-sm text-senary"
+              className="text-sm text-senary pr-0 w-auto"
               onPress={handleShowAllProduct}
             />
           </View>
@@ -168,7 +172,7 @@ const Home = () => {
               onPress={handleShowAllTopCollection}
             />
           </View>
-          <View className="px-6 gap-5">
+          <View className="w-full px-6 gap-5">
             <PromoBanner
               title={`FOR SLIM\n& BEAUTY`}
               tag="|  Sale up to 40%"

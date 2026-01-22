@@ -7,7 +7,7 @@ import {
 import { Controller, FieldValues, UseControllerProps } from "react-hook-form";
 
 // Components
-import Input from "../../../../../packages/ui/src/components/Input";
+import Input from "../Input";
 
 interface ControllerInputProps<
   T extends FieldValues,

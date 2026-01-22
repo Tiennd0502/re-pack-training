@@ -177,7 +177,7 @@ const Header = () => {
   const { title = '', leftIcon = null, rightIcon = null } = header || {};
 
   return (
-    <View className=" w-full flex-row items-center justify-between h-11 pt-2 px-6">
+    <View className="w-full flex-row items-center justify-between h-11 pt-2 px-6">
       <View className="flex-1">{leftIcon && leftIcon}</View>
       <Text className="flex-1 text-center text-primary text-xl font-bold">
         {title}

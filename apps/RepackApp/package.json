@@ -5,8 +5,7 @@
   "scripts": {
     "dev:android": "react-native start --platform android --port 8081 --reset-cache",
     "clean:android": "cd android && ./gradlew clean",
-    "build:bundle": "NODE_ENV=production npx @callstack/repack build --platform android --dev false",
-    "build:android": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
+    "build:bundle": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
     "build:apk": "cd android && ./gradlew assembleRelease",
     "build:release": "pnpm run build:bundle && pnpm run build:apk",
     "install:debug": "./install-and-debug.sh",
@@ -18,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@module-federation/enhanced": "^0.22.1",
+    "@module-federation/enhanced": "^0.13.1",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/bottom-tabs": "^7.9.1",
@@ -40,6 +39,7 @@
     "react-hook-form": "^7.71.0",
     "react-native": "0.81.5",
     "react-native-bootsplash": "^6.3.12",
+    "react-native-css-interop": "^0.2.1",
     "react-native-gesture-handler": "^2.30.0",
     "react-native-keyboard-controller": "^1.20.5",
     "react-native-reanimated": "^4.2.1",

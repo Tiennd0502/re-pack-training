@@ -1,23 +1,4 @@
-// if (!__DEV__) {
-//   const defaultHandler =
-//     (globalThis)?.ErrorUtils?.getGlobalHandler?.();
-
-// 		globalThis.nativeLoggingHook?.(
-// 			`publicPath=${__webpack_public_path__}`,
-// 			1
-// 		);
-
-//   (globalThis).ErrorUtils?.setGlobalHandler?.(
-//     (error, isFatal) => {
-//       globalThis.nativeLoggingHook?.(
-//         '🔥 RELEASE JS ERROR (HOST)' + error?.message ?? 'Host error',
-//         1
-//       );
-//       defaultHandler?.(error, isFatal);
-//     }
-//   );
-// }
-
+import 'nativewind';
 import 'react-native-gesture-handler';
 import { AppRegistry } from 'react-native';
 import { ScriptManager } from '@callstack/repack/client';
