@@ -6,7 +6,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { QueryProvider } from '@repo/providers';
-import { useThemeStore } from '@/stores/theme';
+import { useThemeStore } from '@repo/stores/theme';
 import { Navigation } from '@/navigation';
 
 function App() {

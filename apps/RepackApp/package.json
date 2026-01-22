@@ -8,7 +8,6 @@
     "build:bundle": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
     "build:apk": "cd android && ./gradlew assembleRelease",
     "build:release": "pnpm run build:bundle && pnpm run build:apk",
-    "install:debug": "./install-and-debug.sh",
     "android": "react-native run-android --port 8081",
     "ios": "react-native run-ios --port 8081",
     "lint": "eslint .",
