@@ -7,6 +7,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -32,6 +33,7 @@ export interface InputProps extends Omit<
   isRequired?: boolean;
   className?: string;
   secureTextEntry?: boolean;
+  disabled?: boolean;
   onSubmit?: () => void;
   onToggleVisibility?: () => void;
   onChangeText?: (value: string, field?: string) => void;
@@ -53,6 +55,7 @@ const Input = ({
   onChangeText,
   onSubmit,
   className,
+  disabled = false,
   ...props
 }: InputProps) => {
   const [value, setValue] = useState(defaultValue);
@@ -71,6 +74,7 @@ const Input = ({
   const labelClassName = twMerge(
     "text-xs text-tertiary",
     value ? "font-medium" : "font-regular",
+    disabled ? "opacity-75" : "opacity-100",
   );
 
   const requiredClassName = twMerge(
@@ -79,10 +83,15 @@ const Input = ({
     value ? "font-medium" : "font-regular",
   );
 
+  const inputClassName = twMerge(
+    "h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary",
+    disabled ? "opacity-75" : "opacity-100",
+  );
+
   const handleFocus = useCallback(
     (event: NativeSyntheticEvent<TextInputProps>) => {
       if (!value) {
-        bottom.value = withTiming(36, { duration: 500 });
+        bottom.value = withTiming(36, { duration: 150 });
       }
       onFocus?.(event);
     },
@@ -92,7 +101,7 @@ const Input = ({
   const handleBlur = useCallback(
     (event: NativeSyntheticEvent<TextInputProps>) => {
       if (!value) {
-        bottom.value = withTiming(15, { duration: 500 });
+        bottom.value = withTiming(15, { duration: 150 });
       }
       onBlur?.(event);
     },
@@ -116,61 +125,56 @@ const Input = ({
   }, [onSubmit]);
 
   return (
-    <View className={`w-full ${className}`}>
-      <View className="relative h-[51px]">
-        <TouchableWithoutFeedback
-          onPress={() => {
-            ref?.current?.focus();
-          }}
-        >
-          <Animated.View style={animatedStyle}>
-            <Text className={labelClassName}>{placeholder}</Text>
-            {isRequired && <Text className={requiredClassName}>{` *`}</Text>}
-          </Animated.View>
-        </TouchableWithoutFeedback>
-        <TextInput
-          testID="input"
-          ref={ref}
-          className="h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary"
-          editable={editable}
-          defaultValue={defaultValue}
-          secureTextEntry={secureTextEntry && !showValue}
-          onFocus={handleFocus as any}
-          onBlur={handleBlur as any}
-          onChangeText={handleChangeText}
-          onSubmitEditing={handleSubmitEditing}
-          {...props}
-        />
-
-        {secureTextEntry && (
-          <TouchableOpacity
-            className="absolute right-0 top-0 h-[51px] w-9 justify-center items-center z-3"
-            activeOpacity={0.8}
-            onPress={handleToggleVisibility}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+    <KeyboardAvoidingView>
+      <View className={`w-full ${className}`}>
+        <View className="relative h-[51px]">
+          <TouchableWithoutFeedback
+            onPress={() => {
+              ref?.current?.focus();
+            }}
           >
-            {showValue ? (
-              <EyeIcon
-                width={20}
-                height={20}
-                onPress={handleToggleVisibility}
-              />
-            ) : (
-              <EyeSlashIcon
-                width={20}
-                height={20}
-                onPress={handleToggleVisibility}
-              />
-            )}
-          </TouchableOpacity>
+            <Animated.View style={animatedStyle}>
+              <Text className={labelClassName}>{placeholder}</Text>
+              {isRequired && <Text className={requiredClassName}>{` *`}</Text>}
+            </Animated.View>
+          </TouchableWithoutFeedback>
+          <TextInput
+            testID="input"
+            ref={ref}
+            className={inputClassName}
+            editable={editable && !disabled}
+            defaultValue={defaultValue}
+            secureTextEntry={secureTextEntry && !showValue}
+            onFocus={handleFocus as any}
+            onBlur={handleBlur as any}
+            onChangeText={handleChangeText}
+            onSubmitEditing={handleSubmitEditing}
+            {...props}
+          />
+
+          {secureTextEntry && (
+            <TouchableOpacity
+              className="absolute right-0 top-0 h-[51px] w-9 justify-center items-center z-3"
+              activeOpacity={0.8}
+              disabled={disabled}
+              onPress={handleToggleVisibility}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              {showValue ? (
+                <EyeSlashIcon width={20} height={20} />
+              ) : (
+                <EyeIcon width={20} height={20} />
+              )}
+            </TouchableOpacity>
+          )}
+        </View>
+        <Divider className={errorMessage ? "bg-error" : undefined} />
+
+        {errorMessage && (
+          <Text className="text-xs text-error">{errorMessage}</Text>
         )}
       </View>
-      <Divider className={errorMessage ? "bg-error" : undefined} />
-
-      {errorMessage && (
-        <Text className="text-xs text-error">{errorMessage}</Text>
-      )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -131,6 +131,7 @@ const LoginScreen = () => {
           <Button
             text="Login"
             className="w-36"
+            disabled={isLoading}
             isLoading={Boolean(isSubmitting || isPending)}
             onPress={handleSubmit(handleLogin)}
           />
