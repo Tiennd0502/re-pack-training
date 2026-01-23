@@ -1,0 +1,48 @@
+image: node:20
+
+stages:
+  - build
+
+variables:
+  NODE_ENV: production
+  EAS_NO_VCS: "1"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .pnpm-store/
+    - node_modules/
+
+before_script:
+  - corepack enable
+  - corepack prepare pnpm@9.0.0 --activate
+  - pnpm config set store-dir .pnpm-store
+  - pnpm install --no-frozen-lockfile
+  - npm install -g eas-cli
+
+# PREVIEW BUILD (MR OPEN)
+build_android_preview:
+  stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - cd apps/RepackApp
+    - eas build -p android --profile preview --non-interactive --no-wait
+
+# RELEASE BUILD (MAIN)
+build_android_release_auto:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - cd apps/RepackApp
+    - eas build -p android --profile release --non-interactive --no-wait
+
+# RELEASE BUILD (MANUAL)
+build_android_release_manual:
+  stage: build
+  rules:
+    - when: manual
+  script:
+    - cd apps/RepackApp
+    - eas build -p android --profile release --non-interactive --no-wait

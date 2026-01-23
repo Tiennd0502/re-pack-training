@@ -9,15 +9,9 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from "react-native-reanimated";
 import { twMerge } from "tailwind-merge";
 
 // Components
-import Divider from "../Divider";
 import EyeIcon from "../Icons/EyeIcon";
 import EyeSlashIcon from "../Icons/EyeSlashIcon";
 
@@ -60,21 +54,22 @@ const Input = ({
 }: InputProps) => {
   const [value, setValue] = useState(defaultValue);
   const [showValue, setIsShowValue] = useState(false);
-
-  const bottom = useSharedValue(defaultValue ? 36 : 15);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    flexDirection: "row",
-    position: "absolute",
-    left: 0,
-    bottom: bottom.value,
-    zIndex: 2,
-  }));
+  const [isFocused, setIsFocused] = useState(false);
 
   const labelClassName = twMerge(
     "text-xs text-tertiary",
     value ? "font-medium" : "font-regular",
     disabled ? "opacity-75" : "opacity-100",
+  );
+
+  const contentClassName = twMerge(
+    "relative h-[51px] border-solid border-b",
+    errorMessage ? "border-error" : "border-quinary",
+  );
+
+  const containerLabelClassName = twMerge(
+    "w-fit flex-row justify-start absolute bottom-9 left-0",
+    isFocused || value ? "bottom-9" : "bottom-4",
   );
 
   const requiredClassName = twMerge(
@@ -84,28 +79,24 @@ const Input = ({
   );
 
   const inputClassName = twMerge(
-    "h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary",
+    "h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary text-sm",
     disabled ? "opacity-75" : "opacity-100",
   );
 
   const handleFocus = useCallback(
     (event: NativeSyntheticEvent<TextInputProps>) => {
-      if (!value) {
-        bottom.value = withTiming(36, { duration: 150 });
-      }
+      setIsFocused(true);
       onFocus?.(event);
     },
-    [bottom, value, onFocus],
+    [onFocus],
   );
 
   const handleBlur = useCallback(
     (event: NativeSyntheticEvent<TextInputProps>) => {
-      if (!value) {
-        bottom.value = withTiming(15, { duration: 150 });
-      }
+      setIsFocused(false);
       onBlur?.(event);
     },
-    [bottom, value, onBlur],
+    [onBlur],
   );
 
   const handleChangeText = useCallback(
@@ -127,16 +118,16 @@ const Input = ({
   return (
     <KeyboardAvoidingView>
       <View className={`w-full ${className}`}>
-        <View className="relative h-[51px]">
+        <View className={contentClassName}>
           <TouchableWithoutFeedback
             onPress={() => {
               ref?.current?.focus();
             }}
           >
-            <Animated.View style={animatedStyle}>
+            <View className={containerLabelClassName}>
               <Text className={labelClassName}>{placeholder}</Text>
               {isRequired && <Text className={requiredClassName}>{` *`}</Text>}
-            </Animated.View>
+            </View>
           </TouchableWithoutFeedback>
           <TextInput
             testID="input"
@@ -168,10 +159,9 @@ const Input = ({
             </TouchableOpacity>
           )}
         </View>
-        <Divider className={errorMessage ? "bg-error" : undefined} />
 
         {errorMessage && (
-          <Text className="text-xs text-error">{errorMessage}</Text>
+          <Text className="text-xs text-error mt-1">{errorMessage}</Text>
         )}
       </View>
     </KeyboardAvoidingView>

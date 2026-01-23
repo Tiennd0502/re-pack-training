@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Keyboard, Text, View } from 'react-native';
 
 // Constants
 import { ERROR_MESSAGES } from '@repo/constants/message';
@@ -51,17 +51,22 @@ const LoginScreen = () => {
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { isSubmitting },
   } = useForm<LoginPayLoad>({
     defaultValues,
     mode: 'onBlur',
   });
   const isLoading = Boolean(isSubmitting || isPending);
+  const email = watch('email');
+  const password = watch('password');
+  const hasValidationErrors = !email || !password;
 
   const handleClearErrorMessage = useCallback(() => setErrorMessage(''), []);
 
   const handleLogin = useCallback(
     async (data: LoginPayLoad) => {
+      Keyboard.dismiss();
       mutate(data, {
         onSuccess: async (users: User[]) => {
           if (users?.length) {
@@ -131,7 +136,7 @@ const LoginScreen = () => {
           <Button
             text="Login"
             className="w-36"
-            disabled={isLoading}
+            disabled={isLoading || hasValidationErrors}
             isLoading={Boolean(isSubmitting || isPending)}
             onPress={handleSubmit(handleLogin)}
           />
