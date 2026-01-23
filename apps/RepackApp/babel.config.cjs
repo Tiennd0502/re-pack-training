@@ -12,7 +12,6 @@ module.exports = {
           '@repo/hooks': '../../packages/hooks/src',
           '@repo/types': '../../packages/types/src',
           '@repo/providers': '../../packages/providers/src',
-          '@repo/services': '../../packages/services/src',
           '@repo/ui': '../../packages/ui/src',
           '@repo/ui/components/': '../../packages/ui/src/components/',
           '@repo/utils': '../../packages/utils/src',

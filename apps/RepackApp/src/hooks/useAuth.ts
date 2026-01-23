@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 
-import { API_PATH } from "@repo/constants/api";
-import { GET } from "@repo/services/api";
-import { User } from "@repo/types/user";
-import { LoginPayLoad } from "@repo/types/auth";
+import { API_PATH } from '@repo/constants/api';
+import { GET } from '@/services/api';
+import { User } from '@repo/types/user';
+import { LoginPayLoad } from '@repo/types/auth';
 
 export const useAuth = () => {
   const logIn = useMutation({

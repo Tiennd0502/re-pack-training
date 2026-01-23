@@ -1,28 +1,28 @@
-import { useCallback, useRef } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import Toast from "react-native-toast-message";
+import { useCallback, useRef } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 
 // Constants
-import { API_PATH } from "@repo/constants/api";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@repo/constants/message";
+import { API_PATH } from '@repo/constants/api';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@repo/constants/message';
 
 // Services
-import { GET, PATCH } from "@repo/services/api";
+import { GET, PATCH } from '@/services/api';
 
 // Interface
-import { User } from "@repo/types/user";
+import { User } from '@repo/types/user';
 
 // Stores
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from '@repo/stores/user';
 
 export const useUser = () => {
-  const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
+  const user = useUserStore(state => state.user);
+  const setUser = useUserStore(state => state.setUser);
   const lastRefetchTimeRef = useRef<number>(0);
   const REFETCH_DEBOUNCE_MS = 1000;
 
   const fetchUser = useQuery({
-    queryKey: ["user", user?.id],
+    queryKey: ['user', user?.id],
     queryFn: async () => {
       if (!user?.id) {
         return null;
@@ -80,7 +80,7 @@ export const useUser = () => {
 
       return updatedUser;
     },
-    onSuccess: (updatedUser) => {
+    onSuccess: updatedUser => {
       if (user) {
         const newUser = {
           ...user,
@@ -88,8 +88,8 @@ export const useUser = () => {
         };
         setUser(newUser);
         Toast.show({
-          type: "success",
-          text1: "Success",
+          type: 'success',
+          text1: 'Success',
           text2: SUCCESS_MESSAGES.AVATAR_UPDATED,
         });
       }
@@ -103,8 +103,8 @@ export const useUser = () => {
         };
         setUser(updatedUser);
         Toast.show({
-          type: "error",
-          text1: "Error",
+          type: 'error',
+          text1: 'Error',
           text2: ERROR_MESSAGES.AVATAR_UPDATE_FAILED,
         });
       }

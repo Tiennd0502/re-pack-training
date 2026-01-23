@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-const API_URL = (process.env.API_URL || "").trim();
+const API_URL = (process.env.API_URL || '').trim();
 
 const defaultOptions: any = {
   headers: {
-    accept: "application/json",
+    accept: 'application/json',
   },
 };
 
@@ -24,7 +24,7 @@ export const GET = async <T>(url: string, config?: AxiosRequestConfig) => {
       throw error;
     }
 
-    throw new Error("Something was wrong");
+    throw new Error('Something was wrong');
   }
 };
 
@@ -42,7 +42,7 @@ export const POST = async <T, P>(
       throw error;
     }
 
-    throw new Error("Something was wrong");
+    throw new Error('Something was wrong');
   }
 };
 
@@ -60,6 +60,6 @@ export const PATCH = async <T, P>(
       throw error;
     }
 
-    throw new Error("Something was wrong");
+    throw new Error('Something was wrong');
   }
 };

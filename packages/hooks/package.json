@@ -23,7 +23,6 @@
   "dependencies": {
     "@repo/constants": "workspace:*",
     "@repo/types": "workspace:*",
-    "@repo/services": "workspace:*",
     "@tanstack/react-query": "^5.59.0"
   },
   "peerDependencies": {

@@ -29,7 +29,6 @@
     "@repo/hooks": "workspace:*",
     "@repo/types": "workspace:*",
     "@repo/providers": "workspace:*",
-    "@repo/services": "workspace:*",
     "@repo/stores": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",

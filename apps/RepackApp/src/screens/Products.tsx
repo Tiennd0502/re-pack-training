@@ -17,7 +17,7 @@ import { DIRECTION } from '@repo/types/style';
 import { INIT_PAGE } from '@repo/constants/common';
 
 // Hooks | Stores
-import { useProducts } from '@repo/hooks/useProducts';
+import { useProducts } from '@/hooks/useProducts';
 import { useUserStore } from '@repo/stores/user';
 
 // Utils
