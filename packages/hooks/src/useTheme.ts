@@ -4,7 +4,7 @@ import { useColorScheme } from "react-native";
 import { useThemeStore } from "@repo/stores/theme";
 
 // Interfaces
-import { Theme } from "@repo/interfaces/style";
+import { Theme } from "@repo/types/style";
 
 // Themes
 import { lightThemes, darkThemes } from "@repo/ui/themes";

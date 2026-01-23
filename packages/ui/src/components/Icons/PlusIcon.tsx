@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native";
 import { useTheme } from "@repo/hooks/useTheme";
 
 // Interfaces
-import { IconProps } from "@repo/interfaces/style";
+import { IconProps } from "@repo/types/style";
 
 const PlusIcon = ({
   width = 24,

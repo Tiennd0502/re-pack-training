@@ -10,7 +10,7 @@ import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@repo/constants/message";
 import { GET, PATCH } from "@repo/services/api";
 
 // Interface
-import { User } from "@repo/interfaces/user";
+import { User } from "@repo/types/user";
 
 // Stores
 import { useUserStore } from "@/stores/user";

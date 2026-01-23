@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { shallow } from "zustand/shallow";
 
 // Interfaces
-import { Cart } from "@repo/interfaces/cart";
+import { Cart } from "@repo/types/cart";
 import { STORAGE_KEYS } from "@repo/constants/storageKeys";
 
 // Utils

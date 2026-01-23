@@ -2,7 +2,7 @@ import { memo, useCallback, useMemo } from "react";
 import { FlatList, View } from "react-native";
 
 // Interfaces
-import { Product } from "@repo/interfaces/product";
+import { Product } from "@repo/types/product";
 import ProductCard, { ProductCardType } from "../ProductCard";
 import Skeleton from "../Skeleton";
 

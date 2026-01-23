@@ -4,7 +4,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
 
 // Interfaces
-import { User } from "@repo/interfaces/user";
+import { User } from "@repo/types/user";
 
 // Constants
 import { STORAGE_KEYS } from "@repo/constants/storageKeys";

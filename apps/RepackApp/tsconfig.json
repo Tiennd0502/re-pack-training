@@ -10,8 +10,8 @@
       "@repo/constants/*": ["../../packages/constants/src/*"],
       "@repo/hooks": ["../../packages/hooks/src"],
       "@repo/hooks/*": ["../../packages/hooks/src/*"],
-      "@repo/interfaces": ["../../packages/interfaces/src"],
-      "@repo/interfaces/*": ["../../packages/interfaces/src/*"],
+      "@repo/types": ["../../packages/types/src"],
+      "@repo/types/*": ["../../packages/types/src/*"],
       "@repo/providers": ["../../packages/providers/src"],
       "@repo/providers/*": ["../../packages/providers/src/*"],
       "@repo/services": ["../../packages/services/src"],
@@ -22,9 +22,7 @@
       "@repo/ui/*": ["../../packages/ui/src/*"],
       "@repo/utils": ["../../packages/utils/src"],
       "@repo/utils/*": ["../../packages/utils/src/*"],
-      "ProfileRemote/Profile": [
-        "../../packages/interfaces/src/remotes/profile.d.ts"
-      ]
+      "ProfileRemote/Profile": ["../../packages/types/src/remotes/profile.d.ts"]
     }
   }
 }

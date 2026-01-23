@@ -10,8 +10,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 // Interfaces
 import { SCREENS } from '@/interfaces/navigation';
-import { Product } from '@repo/interfaces/product';
-import { DIRECTION } from '@repo/interfaces/style';
+import { Product } from '@repo/types/product';
+import { DIRECTION } from '@repo/types/style';
 
 // Constants
 import { INIT_PAGE } from '@repo/constants/common';

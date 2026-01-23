@@ -7,7 +7,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 // Interfaces
-import { DIRECTION, IconProps } from "@repo/interfaces/style";
+import { DIRECTION, IconProps } from "@repo/types/style";
 
 // Hooks
 import { useTheme } from "@repo/hooks/useTheme";

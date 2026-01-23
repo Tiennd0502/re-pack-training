@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 
 // Interfaces
-import { DIRECTION } from "@repo/interfaces/style";
+import { DIRECTION } from "@repo/types/style";
 
 // Components
 import ChevronIcon from "../Icons/ChevronIcon";

@@ -2,7 +2,7 @@ import { memo } from "react";
 import { View, Text } from "react-native";
 
 // Interfaces
-import { Review } from "@repo/interfaces/review";
+import { Review } from "@repo/types/review";
 
 // Components
 import Collapse from "../Collapse";

@@ -4,8 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 // Interfaces
-import { Category } from '@repo/interfaces/category';
-import { Product } from '@repo/interfaces/product';
+import { Category } from '@repo/types/category';
+import { Product } from '@repo/types/product';
 
 // Constants
 import { INIT_PAGE } from '@repo/constants/common';

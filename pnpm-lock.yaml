@@ -36,7 +36,7 @@ importers:
       '@react-native/metro-config': 0.81.5
       '@react-native/typescript-config': 0.81.5
       '@repo/eslint-config': workspace:*
-      '@repo/interfaces': workspace:*
+      '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@repo/ui': workspace:*
       '@rspack/core': ^1.3.4
@@ -68,7 +68,7 @@ importers:
       '@module-federation/enhanced': 0.13.1_w7bjwkwkucirhf4lin337jjm4e
       '@react-native-async-storage/async-storage': 2.2.0_react-native@0.81.5
       '@react-native-masked-view/masked-view': 0.3.2_k6evhlf74odk2oi5umdutyoonu
-      '@repo/interfaces': link:../../packages/interfaces
+      '@repo/types': link:../../packages/types
       '@repo/ui': link:../../packages/ui
       nativewind: 4.2.1_pnyefk4cvdn3rv6e5cm2ghjepi
       react: 19.1.0
@@ -139,10 +139,10 @@ importers:
       '@repo/constants': workspace:*
       '@repo/eslint-config': workspace:*
       '@repo/hooks': workspace:*
-      '@repo/interfaces': workspace:*
       '@repo/providers': workspace:*
       '@repo/services': workspace:*
       '@repo/stores': workspace:*
+      '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@repo/ui': workspace:*
       '@repo/utils': workspace:*
@@ -193,10 +193,10 @@ importers:
       '@react-navigation/native-stack': 7.10.1_mcam7n7ub45gqtggzptx22td7i
       '@repo/constants': link:../../packages/constants
       '@repo/hooks': link:../../packages/hooks
-      '@repo/interfaces': link:../../packages/interfaces
       '@repo/providers': link:../../packages/providers
       '@repo/services': link:../../packages/services
       '@repo/stores': link:../../packages/stores
+      '@repo/types': link:../../packages/types
       '@repo/ui': link:../../packages/ui
       '@repo/utils': link:../../packages/utils
       '@rsdoctor/rspack-plugin': 1.5.0_@rspack+core@1.7.3
@@ -310,8 +310,8 @@ importers:
     specifiers:
       '@repo/constants': workspace:*
       '@repo/eslint-config': workspace:*
-      '@repo/interfaces': workspace:*
       '@repo/services': workspace:*
+      '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@tanstack/react-query': ^5.59.0
       '@types/node': ^22.15.3
@@ -320,32 +320,9 @@ importers:
       typescript: ^5.8.3
     dependencies:
       '@repo/constants': link:../constants
-      '@repo/interfaces': link:../interfaces
       '@repo/services': link:../services
+      '@repo/types': link:../types
       '@tanstack/react-query': 5.90.19
-    devDependencies:
-      '@repo/eslint-config': link:../eslint-config
-      '@repo/typescript-config': link:../typescript-config
-      '@types/node': 22.19.7
-      '@types/react': 19.2.9
-      eslint: 8.57.1
-      typescript: 5.9.2
-
-  packages/interfaces:
-    specifiers:
-      '@react-navigation/bottom-tabs': ^7.9.1
-      '@react-navigation/native': ^7.1.27
-      '@react-navigation/native-stack': ^7.9.1
-      '@repo/eslint-config': workspace:*
-      '@repo/typescript-config': workspace:*
-      '@types/node': ^22.15.3
-      '@types/react': ^19.1.0
-      eslint: ^8.19.0
-      typescript: ^5.8.3
-    dependencies:
-      '@react-navigation/bottom-tabs': 7.10.1_b7pcefckq3gvdxzo7tfxeuqqlu
-      '@react-navigation/native': 7.1.28
-      '@react-navigation/native-stack': 7.10.1_b7pcefckq3gvdxzo7tfxeuqqlu
     devDependencies:
       '@repo/eslint-config': link:../eslint-config
       '@repo/typescript-config': link:../typescript-config
@@ -401,7 +378,7 @@ importers:
       '@react-native-async-storage/async-storage': ^2.1.0
       '@repo/constants': workspace:*
       '@repo/eslint-config': workspace:*
-      '@repo/interfaces': workspace:*
+      '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@types/node': ^22.15.3
       '@types/react': ^19.1.0
@@ -411,8 +388,31 @@ importers:
     dependencies:
       '@react-native-async-storage/async-storage': 2.2.0
       '@repo/constants': link:../constants
-      '@repo/interfaces': link:../interfaces
+      '@repo/types': link:../types
       zustand: 5.0.10_@types+react@19.2.9
+    devDependencies:
+      '@repo/eslint-config': link:../eslint-config
+      '@repo/typescript-config': link:../typescript-config
+      '@types/node': 22.19.7
+      '@types/react': 19.2.9
+      eslint: 8.57.1
+      typescript: 5.9.2
+
+  packages/types:
+    specifiers:
+      '@react-navigation/bottom-tabs': ^7.9.1
+      '@react-navigation/native': ^7.1.27
+      '@react-navigation/native-stack': ^7.9.1
+      '@repo/eslint-config': workspace:*
+      '@repo/typescript-config': workspace:*
+      '@types/node': ^22.15.3
+      '@types/react': ^19.1.0
+      eslint: ^8.19.0
+      typescript: ^5.8.3
+    dependencies:
+      '@react-navigation/bottom-tabs': 7.10.1_b7pcefckq3gvdxzo7tfxeuqqlu
+      '@react-navigation/native': 7.1.28
+      '@react-navigation/native-stack': 7.10.1_b7pcefckq3gvdxzo7tfxeuqqlu
     devDependencies:
       '@repo/eslint-config': link:../eslint-config
       '@repo/typescript-config': link:../typescript-config
@@ -460,7 +460,7 @@ importers:
   packages/utils:
     specifiers:
       '@repo/eslint-config': workspace:*
-      '@repo/interfaces': workspace:*
+      '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@types/node': ^22.15.3
       '@typescript-eslint/eslint-plugin': ^5.62.0
@@ -469,7 +469,7 @@ importers:
       eslint-config-prettier: ^8.10.0
       typescript: ^5.8.3
     dependencies:
-      '@repo/interfaces': link:../interfaces
+      '@repo/types': link:../types
     devDependencies:
       '@repo/eslint-config': link:../eslint-config
       '@repo/typescript-config': link:../typescript-config

@@ -2,7 +2,7 @@ import Svg, { Path, Circle } from "react-native-svg";
 import { TouchableOpacity } from "react-native";
 
 // Interfaces
-import { IconProps } from "@repo/interfaces/style";
+import { IconProps } from "@repo/types/style";
 
 // Hooks
 import { useTheme } from "@repo/hooks/useTheme";

@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 
 // Types
-import { DIRECTION } from '@repo/interfaces/style';
+import { DIRECTION } from '@repo/types/style';
 import { SCREENS } from '@/interfaces/navigation';
 
 // Hooks | Stores
