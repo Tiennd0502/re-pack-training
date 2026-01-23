@@ -12,7 +12,7 @@ import { INIT_PAGE } from '@repo/constants/common';
 import { Banners } from '@repo/constants/images';
 
 // Hooks
-import { useProducts } from '@repo/hooks/useProducts';
+import { useProducts } from '@/hooks/useProducts';
 
 // Utils
 import { getData } from '@repo/utils/common';

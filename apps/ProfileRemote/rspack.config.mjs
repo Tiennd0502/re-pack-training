@@ -27,7 +27,6 @@ const config = (envConfig) => {
 				'@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
 				'@repo/types': path.resolve(__dirname, '../../packages/types/src'),
 				'@repo/providers': path.resolve(__dirname, '../../packages/providers/src'),
-				'@repo/services': path.resolve(__dirname, '../../packages/services/src'),
 				'@repo/stores': path.resolve(__dirname, '../../packages/stores/src'),
 				'@repo/ui': path.resolve(__dirname, '../../packages/ui/src'),
 				'@repo/utils': path.resolve(__dirname, '../../packages/utils/src'),

@@ -140,7 +140,6 @@ importers:
       '@repo/eslint-config': workspace:*
       '@repo/hooks': workspace:*
       '@repo/providers': workspace:*
-      '@repo/services': workspace:*
       '@repo/stores': workspace:*
       '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
@@ -194,7 +193,6 @@ importers:
       '@repo/constants': link:../../packages/constants
       '@repo/hooks': link:../../packages/hooks
       '@repo/providers': link:../../packages/providers
-      '@repo/services': link:../../packages/services
       '@repo/stores': link:../../packages/stores
       '@repo/types': link:../../packages/types
       '@repo/ui': link:../../packages/ui
@@ -310,7 +308,6 @@ importers:
     specifiers:
       '@repo/constants': workspace:*
       '@repo/eslint-config': workspace:*
-      '@repo/services': workspace:*
       '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@tanstack/react-query': ^5.59.0
@@ -320,7 +317,6 @@ importers:
       typescript: ^5.8.3
     dependencies:
       '@repo/constants': link:../constants
-      '@repo/services': link:../services
       '@repo/types': link:../types
       '@tanstack/react-query': 5.90.19
     devDependencies:

@@ -14,8 +14,6 @@
       "@repo/types/*": ["../../packages/types/src/*"],
       "@repo/providers": ["../../packages/providers/src"],
       "@repo/providers/*": ["../../packages/providers/src/*"],
-      "@repo/services": ["../../packages/services/src"],
-      "@repo/services/*": ["../../packages/services/src/*"],
       "@repo/stores": ["../../packages/stores/src"],
       "@repo/stores/*": ["../../packages/stores/src/*"],
       "@repo/ui": ["../../packages/ui/src"],

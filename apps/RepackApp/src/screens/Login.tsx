@@ -7,7 +7,7 @@ import { ERROR_MESSAGES } from '@repo/constants/message';
 import { SCHEMA } from '@repo/constants/validation';
 
 // Hooks
-import { useAuth } from '@repo/hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth';
 import { useFocusInput } from '@repo/hooks/useFocusInput';
 
 // Interfaces

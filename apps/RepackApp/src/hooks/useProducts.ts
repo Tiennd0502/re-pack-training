@@ -1,9 +1,9 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-import { Product } from "@repo/types/product";
-import { API_PATH } from "@repo/constants/api";
-import { PAGE_SIZE } from "@repo/constants/common";
-import { GET } from "@repo/services/api";
+import { Product } from '@repo/types/product';
+import { API_PATH } from '@repo/constants/api';
+import { PAGE_SIZE } from '@repo/constants/common';
+import { GET } from '@/services/api';
 
 export const useProducts = () => {
   const useFetchProducts = (initPageParam: number) => {
