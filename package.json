@@ -1,6 +1,11 @@
 {
   "name": "RepackApp",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "setup": "pnpm install",
     "dev": "turbo run dev:android",
@@ -15,6 +20,7 @@
     "build:profile:bundle": "turbo run build:bundle --filter=ProfileRemote",
     "build:apk": "pnpm run build:repack:apk",
     "build:bundle": "pnpm run build:profile:bundle",
+    "build:eas": "eas build -p android --profile release",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
@@ -27,7 +33,6 @@
     "husky": "^9.1.6",
     "lint-staged": "^15.2.0"
   },
-  "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
   },
