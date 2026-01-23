@@ -16,7 +16,7 @@
     "@module-federation/enhanced": "^0.13.1",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-masked-view/masked-view": "^0.3.2",
-    "@repo/interfaces": "workspace:*",
+    "@repo/types": "workspace:*",
     "@repo/ui": "workspace:*",
     "nativewind": "^4.0.1",
     "react": "19.1.0",

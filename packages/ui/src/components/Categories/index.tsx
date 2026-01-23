@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { twMerge } from "tailwind-merge";
 
 // Interfaces
-import { Category } from "@repo/interfaces/category";
+import { Category } from "@repo/types/category";
 
 // Hooks
 import { useTheme } from "@repo/hooks/useTheme";

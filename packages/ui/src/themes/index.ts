@@ -1,4 +1,4 @@
-import { Theme } from "@repo/interfaces/style";
+import { Theme } from "@repo/types/style";
 
 import { colors } from "./colors";
 

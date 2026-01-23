@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { twMerge } from "tailwind-merge";
 
 // Interfaces
-import { Cart } from "@repo/interfaces/cart";
+import { Cart } from "@repo/types/cart";
 
 // Constants
 import { CURRENCY_UNIT } from "@repo/constants/common";

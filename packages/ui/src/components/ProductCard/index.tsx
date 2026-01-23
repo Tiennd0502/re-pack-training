@@ -10,7 +10,7 @@ import {
 import { twMerge } from "tailwind-merge";
 
 // Interfaces
-import { Product } from "@repo/interfaces/product";
+import { Product } from "@repo/types/product";
 
 // Constants
 import { CURRENCY_UNIT } from "@repo/constants/common";

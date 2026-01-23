@@ -10,7 +10,7 @@ module.exports = {
           '@': './src',
           '@repo/constants': '../../packages/constants/src',
           '@repo/hooks': '../../packages/hooks/src',
-          '@repo/interfaces': '../../packages/interfaces/src',
+          '@repo/types': '../../packages/types/src',
           '@repo/providers': '../../packages/providers/src',
           '@repo/services': '../../packages/services/src',
           '@repo/ui': '../../packages/ui/src',

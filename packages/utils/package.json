@@ -23,6 +23,6 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@repo/interfaces": "workspace:*"
+    "@repo/types": "workspace:*"
   }
 }

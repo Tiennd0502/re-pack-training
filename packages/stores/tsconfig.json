@@ -6,8 +6,8 @@
     "paths": {
       "@repo/constants": ["../constants/src"],
       "@repo/constants/*": ["../constants/src/*"],
-      "@repo/interfaces": ["../interfaces/src"],
-      "@repo/interfaces/*": ["../interfaces/src/*"]
+      "@repo/types": ["../types/src"],
+      "@repo/types/*": ["../types/src/*"]
     }
   },
   "include": ["src"],

@@ -53,7 +53,7 @@ const config = (envConfig, _argv) => {
 				'@': path.resolve(process.cwd(), 'src'),
 				'@repo/constants': path.resolve(__dirname, '../../packages/constants/src'),
 				'@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
-				'@repo/interfaces': path.resolve(__dirname, '../../packages/interfaces/src'),
+				'@repo/types': path.resolve(__dirname, '../../packages/types/src'),
 				'@repo/providers': path.resolve(__dirname, '../../packages/providers/src'),
 				'@repo/services': path.resolve(__dirname, '../../packages/services/src'),
 				'@repo/stores': path.resolve(__dirname, '../../packages/stores/src'),

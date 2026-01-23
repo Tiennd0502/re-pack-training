@@ -2,7 +2,14 @@
 
 ## App's workflow
 
-![Diagram](../../docs/app-work-flow.png)
+```mermaid
+flowchart TB
+  Start(["Start"]) --> Splash(["Splash Screen"])
+  Splash --> Login(["Login Screen"])
+  Login --> Home(["Home"])
+  Home --> Products(["Products"]) & Profile{{"Profile (Remote Module)"}}
+  Profile -- logout --> Login
+```
 
 ## Structure
 

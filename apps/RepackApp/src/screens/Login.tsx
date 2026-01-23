@@ -11,8 +11,8 @@ import { useAuth } from '@repo/hooks/useAuth';
 import { useFocusInput } from '@repo/hooks/useFocusInput';
 
 // Interfaces
-import { LoginPayLoad } from '@repo/interfaces/auth';
-import { User } from '@repo/interfaces/user';
+import { LoginPayLoad } from '@repo/types/auth';
+import { User } from '@repo/types/user';
 
 // Stores
 import { useAuthStore } from '@repo/stores/auth';
@@ -131,7 +131,7 @@ const LoginScreen = () => {
           />
         </View>
 
-        <View className="flex-1 items-center mt-5 gap-6 mb-bottom">
+        <View className="items-center mt-5 gap-6">
           {errorMessage && <Text className="text-error">{errorMessage}</Text>}
           <Button
             text="Login"
@@ -150,12 +150,13 @@ const LoginScreen = () => {
           </View>
         </View>
 
-        <View className="mt-7 mb-0 w-full flex-row items-center justify-between">
+        <View className="mt-7 mb-0 w-full flex-row justify-center items-center align-center gap-1">
           <Text className="text-primary text-xs">Don't have an account?</Text>
           <Button
             disabled
             text="Sign Up"
             variant="ghost"
+            className="p-0 w-fit"
             textClassName="text-primary text-xs underline"
             onPress={() => {}}
           />

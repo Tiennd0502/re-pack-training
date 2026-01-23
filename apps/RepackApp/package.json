@@ -27,7 +27,7 @@
     "@react-navigation/native-stack": "^7.9.1",
     "@repo/constants": "workspace:*",
     "@repo/hooks": "workspace:*",
-    "@repo/interfaces": "workspace:*",
+    "@repo/types": "workspace:*",
     "@repo/providers": "workspace:*",
     "@repo/services": "workspace:*",
     "@repo/stores": "workspace:*",

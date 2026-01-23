@@ -7,8 +7,8 @@
       "@/*": ["src/*"],
       "@repo/ui": ["../../packages/ui/src"],
       "@repo/ui/*": ["../../packages/ui/src/*"],
-      "@repo/interfaces": ["../../packages/interfaces/src"],
-      "@repo/interfaces/*": ["../../packages/interfaces/src/*"]
+      "@repo/types": ["../../packages/types/src"],
+      "@repo/types/*": ["../../packages/types/src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

@@ -1,4 +1,4 @@
-import { Cart } from "@repo/interfaces/cart";
+import { Cart } from "@repo/types/cart";
 
 /**
  * Formats a number into a localized string with appropriate decimal places.
