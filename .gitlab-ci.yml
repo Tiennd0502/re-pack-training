@@ -21,13 +21,13 @@ before_script:
   - npm install -g eas-cli
 
 # PREVIEW BUILD (MR OPEN)
-build_android_preview:
-  stage: build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  script:
-    - cd apps/RepackApp
-    - eas build -p android --profile preview --non-interactive --no-wait
+# build_android_preview:
+#   stage: build
+#   rules:
+#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#   script:
+#     - cd apps/RepackApp
+#     - pnpm build:eas:preview
 
 # RELEASE BUILD (MAIN)
 build_android_release_auto:
@@ -36,13 +36,16 @@ build_android_release_auto:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - cd apps/RepackApp
-    - eas build -p android --profile release --non-interactive --no-wait
+    - pnpm build:eas:release
+
 
 # RELEASE BUILD (MANUAL)
 build_android_release_manual:
   stage: build
   rules:
-    - when: manual
+  - if: '$CI_PIPELINE_SOURCE == "pipeline"'
+    when: manual
+  - when: never
   script:
     - cd apps/RepackApp
-    - eas build -p android --profile release --non-interactive --no-wait
+    - pnpm build:eas:release
