@@ -87,47 +87,90 @@ root
 
 ### App's workflow
 
-![Diagram](docs/app-work-flow.png)
+```mermaid
+flowchart TB
+  Start(["Start"]) --> Splash(["Splash Screen"])
+  Splash --> Login(["Login Screen"])
+  Login --> Home(["Home"])
+  Home --> Products(["Products"]) & Profile{{"Profile (Remote Module)"}}
+  Profile -- logout --> Login
+```
 
 ## Module Federation
 
-![Diagram](docs/module-federation.png)
+```mermaid
+flowchart LR
+  %% =========================
+	%% Host App
+	%% =========================
+	subgraph HOST["RepackApp (Host)"]
+	  H_RSPACK["rspack.config.mjs"]
 
-### Remote (ProfileRemote)
+	  H_SHARED["Shared singletons:
+	  - react
+	  - react-native
+	  - react/jsx-runtime
+	  - react-native-svg
+	  (dev: react/jsx-dev-runtime)"]
 
-- Config: `apps/ProfileRemote/rspack.config.mjs`
-- Key parts:
-  - **Name**: `ProfileRemote`
-  - **Filename**: `ProfileRemote.container.js.bundle`
-  - **Exposes**:
-    - `'./Profile': './src/module/Profile/index.tsx'`
-  - **Shared singletons**:
-    - `react`, `react-native`, `react/jsx-runtime`, `react-native-svg`
-  - Uses `withZephyr` to integrate with Zephyr Cloud.
+	  H_PLUGINS["Plugins:
+	  - NativeWindPlugin
+	  - ReanimatedPlugin
+	  - RepackPlugin
+	  - DefinePlugin"]
 
-### Host (RepackApp)
+	  H_REMOTES["Remotes:
+	  ProfileRemote@
+	  ${PROFILE_REMOTE_URL}/ProfileRemote.container.js.bundle"]
 
-- Config: `apps/RepackApp/rspack.config.mjs`
-- Key parts:
-  - **Name**: `RepackApp`
-  - **Remotes**:
-    - `ProfileRemote@<zephyr-https-url>/ProfileRemote.container.js.bundle`
-    - The URL can be made configurable via `PROFILE_REMOTE_URL` env.
-  - **Shared singletons**:
-    - `react`, `react-native`, `react/jsx-runtime`, (and `react/jsx-dev-runtime` in dev), `react-native-svg`
-  - Uses `NativeWindPlugin`, `ReanimatedPlugin`, `RepackPlugin`, and `DefinePlugin` for env vars.
+	  H_ROUTE["Route: src/screens/Profile.tsx
+	  React.lazy(() =>
+	    import('ProfileRemote/Profile')
+	  )
+	  Wrapped in Suspense
+	  + Error Boundary"]
 
-### Consumption in RepackApp
+	  H_PROPS["Passes props:
+	  - userName
+	  - userEmail (from @repo/stores/user)
+	  - onLogout → clears auth/user"]
 
-- Route: `apps/RepackApp/src/screens/Profile.tsx`
-- Loads `ProfileRemote/Profile` lazily:
-  - Using `React.lazy(() => import('ProfileRemote/Profile'))`
-  - Wrapped by `Suspense` and a custom error boundary to:
-    - Show loading state
-    - Display helpful errors if the remote fails to load
-- Data passed into remote:
-  - `userName`, `userEmail` from `@repo/stores/user`
-  - `onLogout` handler that clears auth & user stores
+	  H_RSPACK --> H_SHARED
+	  H_RSPACK --> H_PLUGINS
+	  H_RSPACK --> H_REMOTES
+	  H_REMOTES -->|loads remote| H_ROUTE
+	  H_ROUTE --> H_PROPS
+		end
+
+		%% =========================
+		%% Remote App
+		%% =========================
+		subgraph REMOTE["ProfileRemote (Remote)"]
+	  R_RSPACK["rspack.config.mjs"]
+
+	  R_EXPOSES["Exposes:
+	  ./Profile =
+	  ./src/module/Profile/index.tsx"]
+
+	  R_SHARED["Shared singletons:
+	  - react
+	  - react-native
+	  - react/jsx-runtime
+	  - react-native-svg"]
+
+	  R_ZEPHYR["withZephyr
+	  (Zephyr Cloud integration)"]
+
+	  R_RSPACK --> R_EXPOSES
+	  R_RSPACK --> R_SHARED
+	  R_RSPACK --> R_ZEPHYR
+		end
+
+		%% =========================
+		%% Cross App Connection
+		%% =========================
+		R_EXPOSES -->|profile bundle| H_REMOTES
+```
 
 ---
 
