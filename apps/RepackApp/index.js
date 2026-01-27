@@ -1,5 +1,5 @@
-import 'nativewind';
 import 'react-native-gesture-handler';
+import 'nativewind';
 import { AppRegistry } from 'react-native';
 import { ScriptManager } from '@callstack/repack/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';

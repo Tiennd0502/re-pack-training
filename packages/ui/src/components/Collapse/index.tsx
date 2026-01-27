@@ -70,7 +70,7 @@ const Collapse = ({
           <ChevronIcon rotate={isOpen ? 0 : -90} duration={duration} />
         </View>
       </TouchableOpacity>
-      <Divider className="bg-primary" />
+      {!isOpen && <Divider />}
       <Animated.View className="w-full overflow-hidden" style={bodyStyle}>
         <View
           testID="content"
@@ -80,6 +80,7 @@ const Collapse = ({
           {children}
         </View>
       </Animated.View>
+      {isOpen && <Divider />}
     </View>
   );
 };

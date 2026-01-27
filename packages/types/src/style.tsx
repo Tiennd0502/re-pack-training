@@ -5,6 +5,7 @@ export interface IconProps {
   height?: number;
   color?: string;
   style?: ViewStyle;
+  className?: string;
   disabled?: boolean;
   isActive?: boolean;
   onPress?: () => void;

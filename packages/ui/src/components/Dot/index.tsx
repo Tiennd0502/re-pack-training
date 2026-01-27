@@ -6,11 +6,13 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { twMerge } from "tailwind-merge";
 import { View } from "react-native";
 
+// Hooks
+import { useTheme } from "@repo/hooks/useTheme";
+
 interface DotProps {
-  hasBorder: boolean;
+  isActive: boolean;
   onSelect: () => void;
   color?: string;
   size?: number;
@@ -18,38 +20,30 @@ interface DotProps {
 }
 
 const Dot = ({
-  hasBorder,
+  isActive,
   onSelect,
   color = "",
-  size = 34,
-  className,
+  size = 24,
+  className = "",
 }: DotProps) => {
   const scale = useSharedValue(1);
+  const { theme } = useTheme();
 
   const rStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
 
-  const dotStyles = useMemo(() => {
-    if (hasBorder) {
-      return {
-        width: size,
-        height: size,
-        borderWidth: 5,
-        shadowColor: color,
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.2,
-        shadowRadius: 6,
-        elevation: 4,
-      };
-    }
-
-    return {
-      width: size - 10,
-      height: size - 10,
-      shadowColor: color,
-    };
-  }, [hasBorder, color, size]);
+  const dotStyles = useMemo(
+    () => ({
+      width: isActive ? size : size - 10,
+      height: isActive ? size : size - 10,
+      borderWidth: isActive ? 5 : 1,
+      borderColor: isActive ? theme.tertiary : theme.primary,
+      backgroundColor: color,
+      borderRadius: size,
+    }),
+    [isActive, color, size, theme.primary, theme.tertiary],
+  );
 
   const handleSelect = () => {
     "worklet";
@@ -69,21 +63,10 @@ const Dot = ({
 
   const composed = Gesture.Simultaneous(press);
 
-  const wrapperClassName = twMerge(
-    `rounded-full w-[${size}px] h-[${size}px] items-center justify-center`,
-    color && `bg-${color}-500`,
-    className,
-  );
-
-  const dotClassName = twMerge(
-    `rounded-full w-[${size}px] h-[${size}px]`,
-    hasBorder ? `border border-secondary shadow-lg` : "shadow-sm",
-  );
-
   return (
-    <View className={wrapperClassName}>
+    <View className={className}>
       <GestureDetector gesture={composed}>
-        <Animated.View className={dotClassName} style={[dotStyles, rStyle]} />
+        <Animated.View style={[dotStyles, rStyle]} />
       </GestureDetector>
     </View>
   );

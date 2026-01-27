@@ -1,7 +1,6 @@
 import '../../nativewind.css';
 
 import React, { useEffect, useState } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RNBootSplash from 'react-native-bootsplash';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -38,9 +37,7 @@ function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryProvider>
-        <SafeAreaProvider>
-          <Navigation />
-        </SafeAreaProvider>
+        <Navigation />
       </QueryProvider>
     </GestureHandlerRootView>
   );

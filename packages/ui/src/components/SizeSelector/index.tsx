@@ -2,24 +2,24 @@ import { memo } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { twMerge } from "tailwind-merge";
 
-interface SizeSelectProps {
+interface SizeSelectorProps {
   sizes: string[];
   defaultValue?: string;
   onValueChange: (size: string) => void;
   className?: string;
 }
 
-const SizeSelect = ({
+const SizeSelector = ({
   sizes,
   defaultValue = "",
   onValueChange,
   className = "",
-}: SizeSelectProps) => {
+}: SizeSelectorProps) => {
   const containerClassName = twMerge("", className);
 
   return (
     <View className={containerClassName}>
-      <Text className="text-tertiary capitalize">Size</Text>
+      <Text className="text-sm text-tertiary capitalize">Size</Text>
       <View className="flex-row mt-[10px] gap-2">
         {sizes.map((size) => {
           const isSelected = defaultValue === size;
@@ -57,4 +57,4 @@ const SizeSelect = ({
   );
 };
 
-export default memo(SizeSelect);
+export default memo(SizeSelector);

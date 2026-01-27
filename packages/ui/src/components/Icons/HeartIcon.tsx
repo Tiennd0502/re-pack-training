@@ -15,12 +15,14 @@ export const HeartIcon = memo(
     color,
     disabled = false,
     isActive = false,
+    className = "",
     onPress,
   }: IconProps) => {
     const { theme } = useTheme();
 
     return (
       <TouchableOpacity
+        className={className}
         activeOpacity={0.8}
         onPress={onPress}
         disabled={disabled}

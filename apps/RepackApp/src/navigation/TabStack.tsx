@@ -43,11 +43,11 @@ const TabsStack = () => {
   const tabBarStyle = useMemo(
     () => ({
       borderColor: theme.secondary,
-      backgroundColor: theme.secondary,
+      backgroundColor: theme.background,
       shadowColor: theme.primary,
       boxShadow: `0px -1px 16px 1px ${theme.senary}`,
     }),
-    [theme.secondary, theme.primary, theme.senary],
+    [theme.secondary, theme.primary, theme.senary, theme.background],
   );
 
   const renderTabBarButton = useCallback(

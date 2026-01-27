@@ -7,7 +7,9 @@
       "@repo/constants": ["../constants/src"],
       "@repo/constants/*": ["../constants/src/*"],
       "@repo/types": ["../types/src"],
-      "@repo/types/*": ["../types/src/*"]
+      "@repo/types/*": ["../types/src/*"],
+      "@repo/utils": ["../utils/src/index.ts"],
+      "@repo/utils/*": ["../utils/src/*"]
     }
   },
   "include": ["src"],

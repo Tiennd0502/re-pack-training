@@ -326,6 +326,7 @@ importers:
       '@repo/eslint-config': workspace:*
       '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
+      '@repo/utils': workspace:*
       '@types/node': ^22.15.3
       '@types/react': ^19.1.0
       eslint: ^8.19.0
@@ -335,6 +336,7 @@ importers:
       '@react-native-async-storage/async-storage': 2.2.0
       '@repo/constants': link:../constants
       '@repo/types': link:../types
+      '@repo/utils': link:../utils
       zustand: 5.0.10_@types+react@19.2.9
     devDependencies:
       '@repo/eslint-config': link:../eslint-config
