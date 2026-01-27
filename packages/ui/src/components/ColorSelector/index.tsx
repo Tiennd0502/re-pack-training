@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 // Components
 import Dot from "../Dot";
 
-interface ColorPickerProps {
+interface ColorSelectorProps {
   colors: string[];
   size?: number;
   onValueChange: (value: string) => void;
@@ -12,16 +12,16 @@ interface ColorPickerProps {
   className?: string;
 }
 
-const ColorPicker = ({
+const ColorSelector = ({
   colors,
   defaultValue = "",
   size = 34,
   onValueChange,
   className,
-}: ColorPickerProps) => {
+}: ColorSelectorProps) => {
   return (
     <View className={className}>
-      <Text className="text-tertiary">Color</Text>
+      <Text className="text-sm text-tertiary">Color</Text>
       <View className="flex-row mt-[10px] gap-2 items-center justify-center">
         {colors.map((color, index) => {
           const isSelected = defaultValue === color;
@@ -36,7 +36,7 @@ const ColorPicker = ({
               key={index}
               color={color}
               size={size}
-              hasBorder={isSelected}
+              isActive={isSelected}
               onSelect={handleToggleSelect}
             />
           );
@@ -46,4 +46,4 @@ const ColorPicker = ({
   );
 };
 
-export default memo(ColorPicker);
+export default memo(ColorSelector);

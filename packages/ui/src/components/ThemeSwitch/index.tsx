@@ -5,11 +5,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
-import {
-  GestureHandlerRootView,
-  GestureDetector,
-  Gesture,
-} from "react-native-gesture-handler";
+import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { twMerge } from "tailwind-merge";
 
 // Hooks
@@ -104,35 +100,33 @@ const ThemeSwitch = ({}: ThemeSwitchProps) => {
     [isDark, knobX, optionWidth.value, toggleTheme],
   );
 
-  const tapLight = Gesture.Tap().runOnJS(true).onEnd(handleTap(0));
-  const tapDark = Gesture.Tap().runOnJS(true).onEnd(handleTap(1));
+  const tapLight = Gesture.Tap().onEnd(handleTap(0));
+  const tapDark = Gesture.Tap().onEnd(handleTap(1));
 
   return (
-    <GestureHandlerRootView>
-      <View
-        className="flex-row w-full justify-between bg-tertiary rounded-full h-[40px] items-center relative"
-        onLayout={onLayout}
-      >
-        <Animated.View style={[styles.thumb, knobStyle]} />
-        <GestureDetector gesture={tapLight}>
-          <Animated.View style={styles.option}>
-            <SunIcon color={isDark ? theme.secondary : theme.primary} />
-            <Text className={lightTextStyle} style={[styles.label]}>
-              Light
-            </Text>
-          </Animated.View>
-        </GestureDetector>
+    <View
+      className="flex-row w-full justify-between bg-tertiary rounded-full h-[40px] items-center relative"
+      onLayout={onLayout}
+    >
+      <Animated.View style={[styles.thumb, knobStyle]} />
+      <GestureDetector gesture={tapLight}>
+        <Animated.View style={styles.option}>
+          <SunIcon color={isDark ? theme.secondary : theme.primary} />
+          <Text className={lightTextStyle} style={[styles.label]}>
+            Light
+          </Text>
+        </Animated.View>
+      </GestureDetector>
 
-        <GestureDetector gesture={tapDark}>
-          <Animated.View style={styles.option}>
-            <MoonIcon color={isDark ? theme.primary : theme.secondary} />
-            <Text className={darkTextStyle} style={[styles.label]}>
-              Dark
-            </Text>
-          </Animated.View>
-        </GestureDetector>
-      </View>
-    </GestureHandlerRootView>
+      <GestureDetector gesture={tapDark}>
+        <Animated.View style={styles.option}>
+          <MoonIcon color={isDark ? theme.primary : theme.secondary} />
+          <Text className={darkTextStyle} style={[styles.label]}>
+            Dark
+          </Text>
+        </Animated.View>
+      </GestureDetector>
+    </View>
   );
 };
 

@@ -28,6 +28,7 @@ const ChevronIcon = memo(
     duration = 300,
     disabled = false,
     style,
+    className = "",
     onPress,
   }: ChevronIconProps) => {
     const { theme } = useTheme();
@@ -59,6 +60,7 @@ const ChevronIcon = memo(
 
     return (
       <TouchableOpacity
+        className={className}
         activeOpacity={0.8}
         onPress={onPress}
         disabled={disabled}

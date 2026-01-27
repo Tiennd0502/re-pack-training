@@ -49,7 +49,7 @@ const ReviewCard = ({
           </Text>
         </View>
       </View>
-      <Text className="text-sm text-secondary">{comment}</Text>
+      <Text className="text-sm text-quaternary">{comment}</Text>
     </View>
   );
 };
