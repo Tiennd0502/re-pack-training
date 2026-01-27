@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { memo, useMemo } from "react";
+import { View, Text, Image } from "react-native";
 import { twMerge } from "tailwind-merge";
 
 // Interfaces
@@ -16,7 +16,7 @@ import Quantity from "../Quantity";
 import Checkbox from "../Checkbox";
 
 interface CartItemProps extends Cart {
-  isChecked: boolean;
+  isChecked?: boolean;
   onChangeChecked: () => void;
   onChangeQuantity: (quantity: number) => void;
   className?: string;
@@ -25,7 +25,7 @@ interface CartItemProps extends Cart {
 const CartItem = ({
   product,
   quantity,
-  isChecked,
+  isChecked = false,
   sizes,
   colors,
   onChangeChecked,
@@ -36,17 +36,26 @@ const CartItem = ({
   const { name = "", image = "", price = "" } = product || {};
 
   const wrapperClassName = twMerge(
-    "h-[99px] flex-row rounded-[25px] shadow-lg bg-background",
+    "h-[99px] flex-row rounded-[16px] shadow-lg bg-background",
     className,
   );
 
+  const wrapperStyle = useMemo(
+    () => ({
+      boxShadow: `0px 0px 1px .5px ${theme.senary}`,
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity: 0.2,
+      shadowRadius: 6,
+      elevation: 4,
+      shadowColor: theme.primary,
+    }),
+    [theme.senary, theme.primary],
+  );
+
   return (
-    <View
-      className={wrapperClassName}
-      style={[styles.boxShadow, { shadowColor: theme.primary }]}
-    >
+    <View className={wrapperClassName} style={wrapperStyle}>
       <Image
-        className="rounded-l-[20px] bg-secondary"
+        className="rounded-l-[16px] bg-secondary"
         source={{
           uri: image,
           width: 99,
@@ -91,12 +100,3 @@ const CartItem = ({
 };
 
 export default memo(CartItem);
-
-const styles = StyleSheet.create({
-  boxShadow: {
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-});

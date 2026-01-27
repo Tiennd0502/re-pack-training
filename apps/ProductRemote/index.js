@@ -1,3 +1,4 @@
+import '../../nativewind.css';
 import { AppRegistry } from 'react-native';
 import { ScriptManager } from '@callstack/repack/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';

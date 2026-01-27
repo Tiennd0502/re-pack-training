@@ -117,7 +117,9 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
             />
 
             <View className="w-full flex-row justify-between items-center">
-              <Text className="text-2xl font-bold">Feature Products</Text>
+              <Text className="text-xl font-bold text-primary">
+                Feature Products
+              </Text>
               <Button
                 variant="ghost"
                 text="Show all"
@@ -150,7 +152,7 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
           </View>
 
           <View className="w-full flex-row justify-between items-center mt-3 mb-2 px-6">
-            <Text className="text-2xl font-bold">Recommended</Text>
+            <Text className="text-xl font-bold text-primary">Recommended</Text>
             <Button
               variant="ghost"
               text="Show all"
@@ -169,7 +171,9 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
             />
           </View>
           <View className="flex-row justify-between items-center mt-3 mb-2 px-6">
-            <Text className="text-2xl font-bold">Top Collection</Text>
+            <Text className="text-xl font-bold text-primary">
+              Top Collection
+            </Text>
             <Button
               variant="ghost"
               text="Show all"

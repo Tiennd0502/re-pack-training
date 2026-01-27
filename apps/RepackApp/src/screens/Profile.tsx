@@ -39,8 +39,8 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
           <Suspense
             fallback={
               <View className="flex-1 justify-center items-center">
-                <ActivityIndicator size="large" color={theme.info} />
-                <Text className="mt-2 text-error text-lg">
+                <ActivityIndicator size="large" color={theme.primary} />
+                <Text className="mt-2 text-primary text-lg">
                   Loading Profile...
                 </Text>
               </View>

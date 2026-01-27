@@ -133,6 +133,7 @@ const Header = () => {
           title: 'Your Cart',
           leftIcon: (
             <ChevronIcon
+              color={theme.primary}
               direction={DIRECTION.LEFT}
               style={styles.iconBack}
               onPress={handleGoToBack}
@@ -161,6 +162,7 @@ const Header = () => {
     }
   }, [
     name,
+    theme.primary,
     handleShowMenu,
     handleShowNotification,
     styles.iconBack,

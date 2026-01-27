@@ -109,14 +109,22 @@ const config = (envConfig, _argv) => {
 				'process.env.API_URL': JSON.stringify(mergedEnv.API_URL || ''),
 				'process.env.PROFILE_REMOTE_URL': JSON.stringify(mergedEnv.PROFILE_REMOTE_URL || ''),
 				'process.env.PRODUCT_REMOTE_URL': JSON.stringify(mergedEnv.PRODUCT_REMOTE_URL || ''),
+				'process.env.CART_REMOTE_URL': JSON.stringify(mergedEnv.CART_REMOTE_URL || ''),
 			}),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'RepackApp',
 				filename: 'RepackApp.container.js.bundle',
 				dts: false,
 				remotes: {
-					ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
-					ProductRemote: `ProductRemote@${mergedEnv.PRODUCT_REMOTE_URL}ProductRemote.container.js.bundle`,
+					// ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+					// ProductRemote: `ProductRemote@${mergedEnv.PRODUCT_REMOTE_URL}ProductRemote.container.js.bundle`,
+					// CartRemote: `CartRemote@${mergedEnv.CART_REMOTE_URL}CartRemote.container.js.bundle`,
+					ProfileRemote: `ProfileRemote@https://t-android-feat-update-readme-file-nguy-n-danh-ti-n-pr-2f3b78-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
+					ProductRemote: `ProductRemote@https://t-android-feat-add-cart-screen-nguy-n-danh-ti-n-produ-eb31d6-ze.zephyrcloud.app/ProductRemote.container.js.bundle`,
+					CartRemote: `CartRemote@https://t-android-feat-add-cart-screen-nguy-n-danh-ti-n-cartr-969cfc-ze.zephyrcloud.app/CartRemote.container.js.bundle`,
+					// ProfileRemote: `ProfileRemote@http://127.0.0.1:9001/${platform}/ProfileRemote.container.js.bundle`,
+					// ProductRemote: `ProductRemote@http://127.0.0.1:9002/${platform}/ProductRemote.container.js.bundle`,
+					// CartRemote: `CartRemote@http://127.0.0.1:9003/${platform}/CartRemote.container.js.bundle`,
 				},
 				runtimePlugins: [
 					'@callstack/repack/mf/core-plugin',
@@ -144,6 +152,10 @@ const config = (envConfig, _argv) => {
 						eager: true,
 					},
 					'react-native-reanimated': {
+						singleton: true,
+						eager: true,
+					},
+					'react-native-safe-area-context': {
 						singleton: true,
 						eager: true,
 					},
