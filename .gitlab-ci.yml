@@ -21,13 +21,13 @@ before_script:
   - npm install -g eas-cli
 
 # PREVIEW BUILD (MR OPEN)
-# build_android_preview:
-#   stage: build
-#   rules:
-#     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-#   script:
-#     - cd apps/RepackApp
-#     - pnpm build:eas:preview
+build_android_preview:
+  stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - cd apps/RepackApp
+    - pnpm build:eas:preview
 
 # RELEASE BUILD (MAIN)
 build_android_release_auto:
