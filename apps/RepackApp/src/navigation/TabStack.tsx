@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 // Interfaces
-import { SCREENS, TabBarIcon } from '@/interfaces/navigation';
+import { SCREENS, TabBarIcon } from '@/types/navigation';
 
 // Screens || Stack
 import HomeScreen from '@/screens/Home';
@@ -84,7 +84,7 @@ export default TabsStack;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    height: 68,
+    height: 80,
     paddingTop: 12,
     justifyContent: 'center',
     borderTopLeftRadius: 30,

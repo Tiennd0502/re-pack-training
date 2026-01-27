@@ -1,38 +1,34 @@
-import { useCallback, useMemo } from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { Suspense, lazy, useCallback, useMemo } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 
-// Interfaces
-import { SCREENS } from '@/interfaces/navigation';
+// Types
+import { SCREENS } from '@/types/navigation';
 import { Product } from '@repo/types/product';
-import { DIRECTION } from '@repo/types/style';
 
 // Constants
 import { INIT_PAGE } from '@repo/constants/common';
 
-// Hooks | Stores
-import { useProducts } from '@/hooks/useProducts';
-import { useUserStore } from '@repo/stores/user';
-
 // Utils
 import { getData } from '@repo/utils/common';
 
+// Hooks | Stores
+import { useTheme } from '@repo/hooks/useTheme';
+import { useUserStore } from '@repo/stores/user';
+import { useProducts } from '@/hooks/useProducts';
+
 // Components
 import MainLayout from '@/components/MainLayout';
-import ChevronIcon from '@repo/ui/components/Icons/ChevronIcon';
-import ProductCard, { ProductCardType } from '@repo/ui/components/ProductCard';
-import Skeleton from '@repo/ui/components/Skeleton';
+import RemoteErrorBoundary from '@/components/RemoteErrorBoundary';
 
-const { width: screenWidth } = Dimensions.get('window');
+const RemoteComponent = lazy(() => import('ProductRemote/Product'));
 
-const ProductsScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>();
+interface ProfileRemoteProps {
+  navigation: NavigationProp<any>;
+}
+
+const ProductsScreen = ({ navigation }: ProfileRemoteProps) => {
+  const { theme } = useTheme();
   const user = useUserStore(state => state.user);
   const { useFetchProducts } = useProducts();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
@@ -43,9 +39,6 @@ const ProductsScreen = () => {
     () => (pages.length > 0 && getData<Product>(pages as never[])) || [],
     [pages],
   );
-
-  const width = (screenWidth - 72) / 2;
-  const height = 276;
 
   const handlePressProduct = useCallback(
     (product: Product) => {
@@ -60,90 +53,28 @@ const ProductsScreen = () => {
     }
   }, [hasNextPage, isFetchingNextPage, isLoading, fetchNextPage]);
 
-  const renderItem = useCallback(
-    ({ item }: { item: Product }) => {
-      const isFavorite = user?.favorites?.includes(item.id);
-      return (
-        <View
-          key={item.id}
-          className="w-full"
-          style={{
-            width,
-            overflow: 'hidden',
-          }}
-        >
-          <ProductCard
-            item={item}
-            type={ProductCardType.Primary}
-            height={height}
-            isFavorite={isFavorite}
-            onPress={handlePressProduct}
-          />
-        </View>
-      );
-    },
-    [width, height, handlePressProduct, user?.favorites],
-  );
-
-  const renderFooter = useCallback(() => {
-    if (isFetchingNextPage || isLoading) {
-      return (
-        <View className="flex-row flex-wrap justify-between" style={{ height }}>
-          <Skeleton width={width} height={height} />
-          <Skeleton width={width} height={height} />
-        </View>
-      );
-    }
-    return null;
-  }, [isFetchingNextPage, isLoading, width, height]);
-
-  const renderItemSeparatorComponent = useCallback(() => {
-    return <View className={`w-6 max-h-[${height}px] bg-blue-500`} />;
-  }, [height]);
-
-  const renderEmpty = useCallback(
-    () => (isLoading ? null : <Text>Product Empty</Text>),
-    [isLoading],
-  );
-
-  const getKeyExtractor = useCallback((item: Product) => item.id, []);
-
-  const handleShowFilter = useCallback(() => {}, []);
-
   return (
-    <MainLayout>
-      <View className="flex-row justify-between my-5 px-6">
-        <Text className="text-xl font-bold">{`Found ${products?.length || 0} Results`}</Text>
-        <TouchableOpacity
-          disabled
-          activeOpacity={0.6}
-          onPress={handleShowFilter}
+    <MainLayout className="flex-1">
+      <RemoteErrorBoundary>
+        <Suspense
+          fallback={
+            <View className="flex-1 justify-center items-center">
+              <ActivityIndicator size="large" color={theme.info} />
+              <Text className="mt-2 text-primary text-lg">
+                Loading Products...
+              </Text>
+            </View>
+          }
         >
-          <View className="flex-row justify-center items-center gap-2 rounded-full w-24 h-10 border-2 border-quaternary">
-            <Text>Filter</Text>
-            <ChevronIcon direction={DIRECTION.DOWN} />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <View className="flex-1 px-6 w-full h-full">
-        <FlatList
-          data={products}
-          renderItem={renderItem}
-          keyExtractor={getKeyExtractor}
-          numColumns={2}
-          onEndReached={handleLoadMore}
-          onEndReachedThreshold={0.5}
-          ItemSeparatorComponent={renderItemSeparatorComponent}
-          columnWrapperStyle={{
-            justifyContent: 'space-between',
-            marginBottom: 24,
-          }}
-          ListFooterComponent={renderFooter}
-          ListEmptyComponent={renderEmpty}
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
+          <RemoteComponent
+            products={products}
+            user={user}
+            onPressItem={handlePressProduct}
+            onLoadMore={handleLoadMore}
+            isLoading={isLoading || isFetchingNextPage}
+          />
+        </Suspense>
+      </RemoteErrorBoundary>
     </MainLayout>
   );
 };

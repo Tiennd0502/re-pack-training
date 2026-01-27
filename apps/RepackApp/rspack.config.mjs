@@ -108,6 +108,7 @@ const config = (envConfig, _argv) => {
 			new DefinePlugin({
 				'process.env.API_URL': JSON.stringify(mergedEnv.API_URL || ''),
 				'process.env.PROFILE_REMOTE_URL': JSON.stringify(mergedEnv.PROFILE_REMOTE_URL || ''),
+				'process.env.PRODUCT_REMOTE_URL': JSON.stringify(mergedEnv.PRODUCT_REMOTE_URL || ''),
 			}),
 			new Repack.plugins.ModuleFederationPluginV2({
 				name: 'RepackApp',
@@ -115,6 +116,7 @@ const config = (envConfig, _argv) => {
 				dts: false,
 				remotes: {
 					ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+					ProductRemote: `ProductRemote@${mergedEnv.PRODUCT_REMOTE_URL}ProductRemote.container.js.bundle`,
 				},
 				runtimePlugins: [
 					'@callstack/repack/mf/core-plugin',
@@ -136,6 +138,14 @@ const config = (envConfig, _argv) => {
 						singleton: true,
 						eager: true,
 						requiredVersion: '*',
+					},
+					'react-native-gesture-handler': {
+						singleton: true,
+						eager: true,
+					},
+					'react-native-reanimated': {
+						singleton: true,
+						eager: true,
 					},
 					...(mode === 'development'
 						? {

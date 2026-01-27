@@ -8,7 +8,7 @@ import {
 
 // Types
 import { DIRECTION } from '@repo/types/style';
-import { SCREENS } from '@/interfaces/navigation';
+import { SCREENS } from '@/types/navigation';
 
 // Hooks | Stores
 import { useTheme } from '@repo/hooks/useTheme';
@@ -103,7 +103,7 @@ const Header = () => {
                 style={styles.iconBack}
                 onPress={handleGoToBack}
               />
-              <Text>Dresses</Text>
+              <Text className="text-primary text-xl font-bold">Dresses</Text>
             </View>
           ),
         };

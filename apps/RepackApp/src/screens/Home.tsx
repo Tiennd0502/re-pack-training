@@ -30,6 +30,7 @@ import { ProductCardType } from '@repo/ui/components/ProductCard';
 import PromoBanner, { PromoBannerType } from '@repo/ui/components/PromoBanner';
 import { SCREENS } from '@/interfaces/navigation';
 import { NavigationProp } from '@react-navigation/native';
+import ThemeSwitch from '@repo/ui/components/ThemeSwitch';
 
 const CATEGORIES: Category[] = [
   {
@@ -82,7 +83,12 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
     navigation.navigate(SCREENS.PRODUCTS);
   }, [navigation]);
 
-  const handlePressProduct = useCallback(() => {}, []);
+  const handlePressProduct = useCallback(
+    (product: Product) => {
+      navigation.navigate(SCREENS.PRODUCT_DETAIL, { id: product.id });
+    },
+    [navigation],
+  );
 
   const handleLoadMoreProduct = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage && !isLoading) {
@@ -110,6 +116,9 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               keyActivated={categoryKey.key}
               onChange={handleChangeCategory}
             />
+            <View className="h-[60px]">
+              <ThemeSwitch />
+            </View>
 
             <View className="w-full flex-row justify-between items-center">
               <Text className="text-2xl font-bold">Feature Products</Text>
