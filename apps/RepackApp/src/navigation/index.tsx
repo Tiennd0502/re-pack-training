@@ -15,7 +15,7 @@ import { useAuthStore } from '@repo/stores/auth';
 import TabStack from './TabStack';
 import LoginScreen from '@/screens/Login';
 import ProductsScreen from '@/screens/Products';
-// import ProductDetailScreen from '@/screens/ProductDetail';
+import ProductDetailScreen from '@/screens/ProductDetail';
 
 const AppStack = createNativeStackNavigator();
 
@@ -45,10 +45,10 @@ export const Navigation = () => {
                 component={ProductsScreen}
               />
 
-              {/* <AppStack.Screen
+              <AppStack.Screen
                 name={SCREENS.PRODUCT_DETAIL}
                 component={ProductDetailScreen}
-              /> */}
+              />
             </>
           ) : (
             <AppStack.Screen name={SCREENS.LOGIN} component={LoginScreen} />

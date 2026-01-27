@@ -20,7 +20,7 @@ const ProfileItem = ({ icon, title, onPress }: ProfileItemProps) => {
       <View className="flex-row items-center align-middle justify-between py-5">
         <View className="w-[20px] justify-center items-center">{icon}</View>
         <View className="ml-[10px]">
-          <Text>{title}</Text>
+          <Text className="text-primary text-base font-primary">{title}</Text>
         </View>
         <View className="ml-auto mr-0">
           <ChevronIcon direction={DIRECTION.RIGHT} disabled />

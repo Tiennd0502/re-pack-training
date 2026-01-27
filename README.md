@@ -67,7 +67,7 @@ root
 ├── packages
 │   ├── constants/         # API paths, messages, validation, storage keys
 │   ├── hooks/             # Shared hooks (auth, products, theme, user,...)
-│   ├── interfaces/        # Shared TypeScript types (auth, user, product,...)
+│   ├── types/             # Shared TypeScript types (auth, user, product,...)
 │   ├── providers/         # Shared providers (React Query)
 │   ├── services/          # Axios API client
 │   ├── stores/            # Zustand stores (auth, user, theme)

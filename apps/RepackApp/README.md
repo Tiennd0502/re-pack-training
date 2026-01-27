@@ -19,7 +19,7 @@ RePackApp
 ├── ios/                   # iOS-specific files
 ├── src/
 │   ├── components/        # Reusable components
-│   ├── interfaces/        # TypeScript interfaces and types
+│   ├── types/             # TypeScript types
 │   ├── navigation/        # Navigation configuration
 │   └── screens/           # Screen components
 ├── .eslintrc.cjs          # ESLint configuration

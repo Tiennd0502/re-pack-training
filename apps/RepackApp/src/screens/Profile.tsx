@@ -1,4 +1,4 @@
-import { Suspense, lazy, Component, ReactNode, useCallback } from 'react';
+import { Suspense, lazy, useCallback } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 
 // Hooks | Stores
@@ -8,6 +8,7 @@ import { useAuthStore } from '@repo/stores/auth';
 
 // Components
 import MainLayout from '@/components/MainLayout';
+import RemoteErrorBoundary from '@/components/RemoteErrorBoundary';
 
 const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'));
 
@@ -15,39 +16,6 @@ interface ProfileRemoteProps {
   userName?: string;
   userEmail?: string;
   onLogout?: () => void;
-}
-
-class ProfileRemoteErrorBoundary extends Component<
-  { children: ReactNode },
-  { hasError: boolean; error: Error | null }
-> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <View className="flex-1 justify-center items-center p-4">
-          <Text className="text-xl font-bold mb-2 text-error">
-            Failed to load Profile
-          </Text>
-          {this.state.error && (
-            <Text className="text-sm text-gray-500 text-center">
-              Error: {this.state.error?.message}
-            </Text>
-          )}
-        </View>
-      );
-    }
-
-    return this.props.children;
-  }
 }
 
 const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
@@ -62,17 +30,19 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
   }, [setIsAuthenticated]);
 
   return (
-    <MainLayout>
+    <MainLayout className="flex-1">
       <ScrollView
         contentContainerClassName="flex-1 w-full"
         showsVerticalScrollIndicator={false}
       >
-        <ProfileRemoteErrorBoundary>
+        <RemoteErrorBoundary title="Profile">
           <Suspense
             fallback={
               <View className="flex-1 justify-center items-center">
                 <ActivityIndicator size="large" color={theme.info} />
-                <Text className="mt-2 text-gray-500">Loading Profile...</Text>
+                <Text className="mt-2 text-error text-lg">
+                  Loading Profile...
+                </Text>
               </View>
             }
           >
@@ -82,7 +52,7 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
               onLogout={handleGoToLogout}
             />
           </Suspense>
-        </ProfileRemoteErrorBoundary>
+        </RemoteErrorBoundary>
       </ScrollView>
     </MainLayout>
   );
