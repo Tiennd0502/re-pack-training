@@ -61,6 +61,7 @@ importers:
       '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@repo/ui': workspace:*
+      '@repo/utils': workspace:*
       '@rspack/core': ^1.3.4
       '@swc/helpers': ^0.5.17
       nativewind: ^4.0.1
@@ -83,6 +84,7 @@ importers:
       '@react-native-masked-view/masked-view': 0.3.2_k6evhlf74odk2oi5umdutyoonu
       '@repo/types': link:../../packages/types
       '@repo/ui': link:../../packages/ui
+      '@repo/utils': link:../../packages/utils
       nativewind: 4.2.1_pnyefk4cvdn3rv6e5cm2ghjepi
       react: 19.1.0
       react-native: 0.81.5_afgtx42d3fmanhmx2z4x3qizzq

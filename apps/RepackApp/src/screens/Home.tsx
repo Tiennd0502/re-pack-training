@@ -2,10 +2,12 @@ import { Platform, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useCallback, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { NavigationProp } from '@react-navigation/native';
 
-// Interfaces
+// Types
 import { Category } from '@repo/types/category';
 import { Product } from '@repo/types/product';
+import { SCREENS } from '@/types/navigation';
 
 // Constants
 import { INIT_PAGE } from '@repo/constants/common';
@@ -28,9 +30,6 @@ import Button from '@repo/ui/components/Button';
 import ProductList from '@repo/ui/components/ProductList';
 import { ProductCardType } from '@repo/ui/components/ProductCard';
 import PromoBanner, { PromoBannerType } from '@repo/ui/components/PromoBanner';
-import { SCREENS } from '@/interfaces/navigation';
-import { NavigationProp } from '@react-navigation/native';
-import ThemeSwitch from '@repo/ui/components/ThemeSwitch';
 
 const CATEGORIES: Category[] = [
   {
@@ -116,9 +115,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               keyActivated={categoryKey.key}
               onChange={handleChangeCategory}
             />
-            <View className="h-[60px]">
-              <ThemeSwitch />
-            </View>
 
             <View className="w-full flex-row justify-between items-center">
               <Text className="text-2xl font-bold">Feature Products</Text>

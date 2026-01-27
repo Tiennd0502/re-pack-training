@@ -49,7 +49,7 @@ const Profile: React.FC<ProfileProps> = ({
         <Text className="text-base text-tertiary">{userEmail}</Text>
       </View>
 
-      <View className="bg-white mt-3 py-3">
+      <View className="bg-background mt-3 py-3">
         <ProfileItem
           title="Address"
           icon={<AddressIcon />}
