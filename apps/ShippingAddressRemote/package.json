@@ -1,10 +1,10 @@
 {
-  "name": "CartRemote",
+  "name": "ShippingAddressRemote",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev:android": "react-native start --platform android --port 8084 --reset-cache",
-    "dev:rm": "react-native webpack-start --port 9003 --platform android",
+    "dev:rm": "react-native webpack-start --port 9004 --platform android",
     "clean:android": "cd android && ./gradlew clean",
     "build:apk": "cd android && ./gradlew assembleRelease",
     "build:bundle": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",
@@ -19,6 +19,8 @@
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@repo/types": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@repo/constants": "workspace:*",
+    "@repo/hooks": "workspace:*",
     "nativewind": "^4.0.1",
     "react": "19.1.0",
     "react-native": "0.81.5",

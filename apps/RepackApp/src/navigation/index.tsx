@@ -17,6 +17,8 @@ import LoginScreen from '@/screens/Login';
 import ProductsScreen from '@/screens/Products';
 import ProductDetailScreen from '@/screens/ProductDetail';
 import CartScreen from '@/screens/Cart';
+import ShippingAddressScreen from '@/screens/ShippingAddress';
+import OrderCompletedScreen from '@/screens/OrderCompleted';
 
 const AppStack = createNativeStackNavigator();
 
@@ -50,6 +52,15 @@ export const Navigation = () => {
                 component={ProductDetailScreen}
               />
               <AppStack.Screen name={SCREENS.CART} component={CartScreen} />
+
+              <AppStack.Screen
+                name={SCREENS.SHIPPING_ADDRESS}
+                component={ShippingAddressScreen}
+              />
+              <AppStack.Screen
+                name={SCREENS.ORDER_COMPLETED}
+                component={OrderCompletedScreen}
+              />
             </>
           ) : (
             <AppStack.Screen name={SCREENS.LOGIN} component={LoginScreen} />

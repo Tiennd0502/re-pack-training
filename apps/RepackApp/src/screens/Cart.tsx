@@ -31,9 +31,7 @@ const CartScreen = ({ navigation }: CartScreenProps) => {
   );
 
   const handleGoToCheckout = useCallback(() => {
-    navigation.navigate(SCREENS.ORDER_STACK, {
-      screen: SCREENS.SHIPPING_ADDRESS,
-    });
+    navigation.navigate(SCREENS.SHIPPING_ADDRESS);
   }, [navigation]);
 
   return (

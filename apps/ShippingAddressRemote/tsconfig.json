@@ -1,0 +1,19 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-native",
+    "paths": {
+      "@/*": ["src/*"],
+      "@repo/ui": ["../../packages/ui/src"],
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/types": ["../../packages/types/src"],
+      "@repo/types/*": ["../../packages/types/src/*"],
+      "@repo/constants": ["../../packages/constants/src"],
+      "@repo/constants/*": ["../../packages/constants/src/*"],
+      "@repo/hooks": ["../../packages/hooks/src"],
+      "@repo/hooks/*": ["../../packages/hooks/src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}
