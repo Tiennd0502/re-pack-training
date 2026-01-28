@@ -45,7 +45,7 @@ const ShippingMethod = ({
 
   return (
     <View className={wrapperClassName}>
-      <Text className="text-base font-secondary text-primary">
+      <Text className="text-base font-secondary font-bold text-primary">
         Shipping method
       </Text>
       <View className="mt-[25px]">
@@ -53,10 +53,10 @@ const ShippingMethod = ({
           <Radio selected={!value} onPress={() => handleChangeValue(0)} />
           <View className="flex-1 justify-between gap-[7px]">
             <View className="flex-row items-center gap-[15px]">
-              <Text className="text-xs font-primary font-semibold text-primary">
+              <Text className="text-sm font-primary font-semibold text-primary">
                 Free
               </Text>
-              <Text className="text-primary">Delivery to home</Text>
+              <Text className="text-sm text-primary">Delivery to home</Text>
             </View>
             <Text className="text-sm text-quaternary opacity-40">
               Delivery from 3 to 7 business days
@@ -70,10 +70,10 @@ const ShippingMethod = ({
           />
           <View className="flex-1 justify-between gap-[7px]">
             <View className="flex-row items-center gap-[15px]">
-              <Text className="text-xs font-primary font-semibold text-primary">
+              <Text className="text-sm font-primary font-semibold text-primary">
                 $ 9.90
               </Text>
-              <Text className="text-primary">Delivery to home</Text>
+              <Text className="text-sm text-primary">Delivery to home</Text>
             </View>
             <Text className="text-sm text-quaternary opacity-40">
               Delivery from 4 to 6 business days
@@ -87,10 +87,10 @@ const ShippingMethod = ({
           />
           <View className="flex-1 justify-between gap-[7px]">
             <View className="flex-row items-center gap-[15px]">
-              <Text className="text-xs font-primary font-semibold text-primary">
+              <Text className="text-sm font-primary font-semibold text-primary">
                 $ 19.90
               </Text>
-              <Text className="text-primary">Fast Delivery</Text>
+              <Text className="text-sm text-primary">Fast Delivery</Text>
             </View>
             <Text className="text-sm text-quaternary opacity-40">
               Delivery from 2 to 3 business days

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev:android": "react-native start --platform android --port 8083 --reset-cache",
+    "dev:rm": "react-native webpack-start --port 9002 --platform android",
     "clean:android": "cd android && ./gradlew clean",
     "build:apk": "cd android && ./gradlew assembleRelease",
     "build:bundle": "npx react-native webpack-bundle --platform android --entry-file index.js --dev false --minify true",

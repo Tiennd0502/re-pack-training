@@ -57,7 +57,7 @@ const Input = ({
   const [isFocused, setIsFocused] = useState(false);
 
   const labelClassName = twMerge(
-    "text-xs text-tertiary",
+    "text-sm text-tertiary",
     value ? "font-medium" : "font-regular",
     disabled ? "opacity-75" : "opacity-100",
   );
@@ -79,7 +79,7 @@ const Input = ({
   );
 
   const inputClassName = twMerge(
-    "h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary text-sm",
+    "h-[51px] pt-[25px] pb-0.5 pl-0 text-primary font-secondary text-base",
     disabled ? "opacity-75" : "opacity-100",
   );
 
