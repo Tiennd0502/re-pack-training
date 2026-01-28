@@ -1,4 +1,7 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+
+// Types
+import { User } from '@repo/types/user';
 
 // Components
 import ProfileItem from '@repo/ui/components/ProfileItem';
@@ -10,16 +13,12 @@ import { HeartIcon } from '@repo/ui/components/Icons/HeartIcon';
 import StarIcon from '@repo/ui/components/Icons/StarIcon';
 
 interface ProfileProps {
-  userName?: string;
-  userEmail?: string;
-  onLogout?: () => void;
+  user: User;
+  onLogout: () => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({
-  userName = 'User Name',
-  userEmail = 'user@example.com',
-  onLogout,
-}) => {
+const Profile: React.FC<ProfileProps> = ({ user, onLogout }) => {
+  const { name = '', email = '', avatar = '' } = user || {};
   const handleGoToAddress = () => {};
 
   const handleGoToPaymentMethod = () => {};
@@ -34,19 +33,31 @@ const Profile: React.FC<ProfileProps> = ({
     <View className="px-5 py-4 justify-center mt-10">
       <View className="items-center py-[30px] border-b border-quaternary">
         <View className="mb-4">
-          <View className="w-[100px] h-[100px] rounded-full bg-info justify-center items-center">
-            <Text className="text-4xl font-bold text-secondary">
-              {userName
-                .split(' ')
-                .map(n => n[0])
-                .join('')
-                .toUpperCase()
-                .slice(0, 2)}
-            </Text>
+          <View className="w-[100px] h-[100px] rounded-full bg-info justify-center items-center overflow-hidden">
+            {avatar ? (
+              <Image
+                source={{ uri: avatar }}
+                resizeMode="cover"
+                className="w-[100px] h-[100px] rounded-full"
+              />
+            ) : (
+              <Text className="text-4xl font-bold text-secondary">
+                {name
+                  .split(' ')
+                  .map(n => n[0])
+                  .join('')
+                  .toUpperCase()
+                  .slice(0, 2)}
+              </Text>
+            )}
           </View>
         </View>
-        <Text className="text-2xl font-bold text-primary mb-1">{userName}</Text>
-        <Text className="text-base text-tertiary">{userEmail}</Text>
+        <Text className="text-2xl font-bold text-primary mb-1">
+          {name || 'User Name'}
+        </Text>
+        <Text className="text-base text-tertiary">
+          {email || 'user@example.com'}
+        </Text>
       </View>
 
       <View className="bg-background mt-3 py-3">
@@ -76,11 +87,7 @@ const Profile: React.FC<ProfileProps> = ({
           onPress={handleGoToRating}
         />
 
-        <ProfileItem
-          icon={<LogoutIcon />}
-          title="Log out"
-          onPress={onLogout || (() => {})}
-        />
+        <ProfileItem icon={<LogoutIcon />} title="Log out" onPress={onLogout} />
       </View>
     </View>
   );
