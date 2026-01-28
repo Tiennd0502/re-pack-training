@@ -389,7 +389,9 @@ importers:
       '@react-native/gradle-plugin': 0.81.5
       '@react-native/metro-config': 0.81.5
       '@react-native/typescript-config': 0.81.5
+      '@repo/constants': workspace:*
       '@repo/eslint-config': workspace:*
+      '@repo/hooks': workspace:*
       '@repo/types': workspace:*
       '@repo/typescript-config': workspace:*
       '@repo/ui': workspace:*
@@ -413,6 +415,8 @@ importers:
       '@module-federation/enhanced': 0.13.1_aklfowciv2b4boedv6hiqxiptu
       '@react-native-async-storage/async-storage': 2.2.0_react-native@0.81.5
       '@react-native-masked-view/masked-view': 0.3.2_k6evhlf74odk2oi5umdutyoonu
+      '@repo/constants': link:../../packages/constants
+      '@repo/hooks': link:../../packages/hooks
       '@repo/types': link:../../packages/types
       '@repo/ui': link:../../packages/ui
       nativewind: 4.2.1_pnyefk4cvdn3rv6e5cm2ghjepi
