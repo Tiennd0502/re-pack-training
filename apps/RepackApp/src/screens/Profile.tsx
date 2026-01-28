@@ -12,13 +12,7 @@ import RemoteErrorBoundary from '@/components/RemoteErrorBoundary';
 
 const ProfileRemoteComponent = lazy(() => import('ProfileRemote/Profile'));
 
-interface ProfileRemoteProps {
-  userName?: string;
-  userEmail?: string;
-  onLogout?: () => void;
-}
-
-const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
+const ProfileScreen = () => {
   const { theme } = useTheme();
   const user = useUserStore(state => state.user);
   const setIsAuthenticated = useAuthStore(state => state.setIsAuthenticated);
@@ -46,11 +40,9 @@ const ProfileScreen: React.FC<ProfileRemoteProps> = () => {
               </View>
             }
           >
-            <ProfileRemoteComponent
-              userName={user?.name}
-              userEmail={user?.email}
-              onLogout={handleGoToLogout}
-            />
+            {user && (
+              <ProfileRemoteComponent user={user} onLogout={handleGoToLogout} />
+            )}
           </Suspense>
         </RemoteErrorBoundary>
       </ScrollView>

@@ -50,7 +50,7 @@ const ShippingAddressScreen: React.FC<ShippingAddressRemoteProps> = ({
     clearCart();
 
     navigation.navigate(SCREENS.ORDER_COMPLETED);
-  }, [clearCart, insets.top, isAndroid, navigation]);
+  }, [clearCart, insets.top, navigation]);
 
   return (
     <MainLayout className="flex-1">
@@ -58,13 +58,13 @@ const ShippingAddressScreen: React.FC<ShippingAddressRemoteProps> = ({
         contentContainerClassName="flex-1 w-full px-6"
         showsVerticalScrollIndicator={false}
       >
-        <RemoteErrorBoundary title="Profile">
+        <RemoteErrorBoundary title="Shipping Address">
           <Suspense
             fallback={
               <View className="flex-1 justify-center items-center">
-                <ActivityIndicator size="large" color={theme.info} />
-                <Text className="mt-2 text-error text-lg">
-                  Loading Profile...
+                <ActivityIndicator size="large" color={theme.primary} />
+                <Text className="mt-2 text-primary text-lg">
+                  Loading Shipping Address...
                 </Text>
               </View>
             }

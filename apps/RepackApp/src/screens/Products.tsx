@@ -55,7 +55,7 @@ const ProductsScreen = ({ navigation }: ProfileRemoteProps) => {
 
   return (
     <MainLayout className="flex-1">
-      <RemoteErrorBoundary>
+      <RemoteErrorBoundary title="Products">
         <Suspense
           fallback={
             <View className="flex-1 justify-center items-center">

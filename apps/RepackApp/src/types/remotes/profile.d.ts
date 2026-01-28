@@ -1,10 +1,10 @@
 declare module 'ProfileRemote/Profile' {
   import { ComponentType } from 'react';
+  import { User } from '@repo/types/user';
 
   interface ProfileProps {
-    userName?: string;
-    userEmail?: string;
-    onLogout?: () => void;
+    user: User;
+    onLogout: () => void;
   }
 
   const Profile: ComponentType<ProfileProps>;
