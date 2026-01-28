@@ -21,7 +21,8 @@
       "@repo/utils": ["../../packages/utils/src"],
       "@repo/utils/*": ["../../packages/utils/src/*"],
       "ProfileRemote/Profile": ["./src/types/remotes/profile.d.ts"],
-      "ProductRemote/Product": ["./src/types/remotes/product.d.ts"]
+      "ProductRemote/Product": ["./src/types/remotes/product.d.ts"],
+      "CartRemote/Cart": ["./src/types/remotes/cart.d.ts"]
     }
   }
 }

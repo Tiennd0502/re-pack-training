@@ -59,7 +59,7 @@ const ProductsScreen = ({ navigation }: ProfileRemoteProps) => {
         <Suspense
           fallback={
             <View className="flex-1 justify-center items-center">
-              <ActivityIndicator size="large" color={theme.info} />
+              <ActivityIndicator size="large" color={theme.primary} />
               <Text className="mt-2 text-primary text-lg">
                 Loading Products...
               </Text>

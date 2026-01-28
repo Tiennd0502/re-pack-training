@@ -10,6 +10,9 @@
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
         "CI": "false"
+      },
+      "cache": {
+        "disabled": true
       }
     },
     "release": {
@@ -21,7 +24,7 @@
         "CI": "false"
       },
       "cache": {
-        "disabled": false
+        "disabled": true
       }
     }
   },

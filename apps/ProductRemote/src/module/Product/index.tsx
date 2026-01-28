@@ -89,7 +89,7 @@ const Products: React.FC<ProductsProps> = ({
 
   return (
     <>
-      <View className="flex-row justify-between my-5 px-6">
+      <View className="flex-row justify-between py-4 px-6">
         <Text className="text-xl text-primary font-bold">{`Found ${products?.length || 0} Results`}</Text>
         <TouchableOpacity
           disabled

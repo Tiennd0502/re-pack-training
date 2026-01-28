@@ -10,8 +10,8 @@ import { withZephyr } from 'zephyr-repack-plugin';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const config = (envConfig) => {
-	const { mode = 'development', context = __dirname, platform } = envConfig;
+const config = envConfig => {
+  const { mode = 'development', context = __dirname, platform } = envConfig;
 
   return Repack.defineRspackConfig({
     mode,
@@ -21,16 +21,21 @@ const config = (envConfig) => {
     resolve: {
       ...Repack.getResolveOptions(),
       alias: {
-				'@': path.resolve(process.cwd(), 'src'),
-				'@css': path.resolve(__dirname, '../../nativewind.css'),
-        '@repo/constants': path.resolve(__dirname, '../../packages/constants/src'),
-				'@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
-				'@repo/types': path.resolve(__dirname, '../../packages/types/src'),
-				'@repo/providers': path.resolve(__dirname, '../../packages/providers/src'),
-				'@repo/stores': path.resolve(__dirname, '../../packages/stores/src'),
-				'@repo/ui': path.resolve(__dirname, '../../packages/ui/src'),
-				'@repo/utils': path.resolve(__dirname, '../../packages/utils/src'),
-			}
+        '@': path.resolve(process.cwd(), 'src'),
+        '@repo/constants': path.resolve(
+          __dirname,
+          '../../packages/constants/src',
+        ),
+        '@repo/hooks': path.resolve(__dirname, '../../packages/hooks/src'),
+        '@repo/types': path.resolve(__dirname, '../../packages/types/src'),
+        '@repo/providers': path.resolve(
+          __dirname,
+          '../../packages/providers/src',
+        ),
+        '@repo/stores': path.resolve(__dirname, '../../packages/stores/src'),
+        '@repo/ui': path.resolve(__dirname, '../../packages/ui/src'),
+        '@repo/utils': path.resolve(__dirname, '../../packages/utils/src'),
+      },
     },
 
     module: {
@@ -63,7 +68,7 @@ const config = (envConfig) => {
       new Repack.RepackPlugin({
         platform,
       }),
-			new IgnorePlugin({
+      new IgnorePlugin({
         resourceRegExp: /^@react-native-masked-view/,
       }),
       new Repack.plugins.ModuleFederationPluginV2({
@@ -95,23 +100,23 @@ const config = (envConfig) => {
             singleton: true,
             eager: true,
           },
-					'react-native-svg': {
-						singleton: true,
-						eager: true,
-					},
-					'tailwindcss': {
-						singleton: true,
-						eager: true,
-					},
-					'nativewind': {
-						singleton: true,
-						eager: true,
-					},
-					'react-native-css-interop/': {
-						singleton: true,
-						eager: false,
-						requiredVersion: '*',
-					},
+          'react-native-svg': {
+            singleton: true,
+            eager: true,
+          },
+          tailwindcss: {
+            singleton: true,
+            eager: true,
+          },
+          nativewind: {
+            singleton: true,
+            eager: true,
+          },
+          'react-native-css-interop/': {
+            singleton: true,
+            eager: false,
+            requiredVersion: '*',
+          },
           ...(mode === 'development'
             ? {
                 'react/jsx-dev-runtime': {
