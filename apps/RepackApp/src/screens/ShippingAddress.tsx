@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   ScrollView,
   Platform,
+  Alert,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,11 +17,11 @@ import { SCREENS } from '@/types/navigation';
 // Hooks | Stores
 import { useTheme } from '@repo/hooks/useTheme';
 import { useUserStore } from '@repo/stores/user';
+import { useCartStore } from '@repo/stores/cart';
 
 // Components
 import MainLayout from '@/components/MainLayout';
 import RemoteErrorBoundary from '@/components/RemoteErrorBoundary';
-import { useCartStore } from '@repo/stores/cart';
 
 const RemoteComponent = lazy(
   () => import('ShippingAddressRemote/ShippingAddress'),
@@ -42,6 +43,23 @@ const ShippingAddressScreen: React.FC<ShippingAddressRemoteProps> = ({
   const clearCart = useCartStore(state => state.clearCart);
 
   const handleGoToOrderCompleted = useCallback(async () => {
+    const currentCarts = useCartStore.getState().carts;
+    const isEmptyCart = currentCarts.length === 0;
+
+    if (isEmptyCart) {
+      Alert.alert('Cart is empty', 'Please add some items to your cart', [
+        {
+          text: 'Go to Home',
+          onPress: () => {
+            navigation.navigate(SCREENS.TABS, {
+              screen: SCREENS.HOME,
+            });
+          },
+        },
+      ]);
+      return;
+    }
+
     Toast.show({
       type: 'success',
       text1: 'Order successfully',

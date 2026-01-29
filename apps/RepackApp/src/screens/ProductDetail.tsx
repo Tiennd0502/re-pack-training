@@ -223,7 +223,7 @@ const ProductDetail = ({
             ) : (
               <Image
                 source={{ uri: product?.image }}
-                className="w-full h-[406px] object-cover object-center z-0"
+                className="w-full h-[426px] object-cover object-center z-0"
               />
             )}
             <View className="flex-1 h-full px-6 z-3 pt-14 -top-10 bg-background rounded-t-[30px] overflow-hidden">
@@ -238,7 +238,7 @@ const ProductDetail = ({
                   </View>
                 </View>
                 <View className="items-end">
-                  <Text className="text-[26px] font-primary font-bold text-septenary">
+                  <Text className="text-[26px] font-primary font-bold text-primary">
                     {`${CURRENCY_UNIT} ${promoPrice || originalPrice}`}
                   </Text>
                   {!!promoPrice && (
