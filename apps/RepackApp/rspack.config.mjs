@@ -42,6 +42,18 @@ const mergedEnv = { ...env, ...process.env };
 const config = (envConfig, _argv) => {
   const { mode = 'development', context = __dirname, platform } = envConfig;
 
+  const remotes = mode === 'development' ? {
+    ProfileRemote: `ProfileRemote@http://127.0.0.1:9001/${platform}/ProfileRemote.container.js.bundle`,
+    ProductRemote: `ProductRemote@http://127.0.0.1:9002/${platform}/ProductRemote.container.js.bundle`,
+    CartRemote: `CartRemote@http://127.0.0.1:9003/${platform}/CartRemote.container.js.bundle`,
+    ShippingAddressRemote: `ShippingAddressRemote@http://127.0.0.1:9004/${platform}/ShippingAddressRemote.container.js.bundle`,
+  } : {
+    ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
+    ProductRemote: `ProductRemote@${mergedEnv.PRODUCT_REMOTE_URL}ProductRemote.container.js.bundle`,
+    CartRemote: `CartRemote@${mergedEnv.CART_REMOTE_URL}CartRemote.container.js.bundle`,
+    ShippingAddressRemote: `ShippingAddressRemote@${mergedEnv.SHIPPING_ADDRESS_REMOTE_URL}ShippingAddressRemote.container.js.bundle`,
+  }
+
   return Repack.defineRspackConfig({
     mode,
     context: __dirname,
@@ -116,20 +128,7 @@ const config = (envConfig, _argv) => {
         name: 'RepackApp',
         filename: 'RepackApp.container.js.bundle',
         dts: false,
-        remotes: {
-          // ProfileRemote: `ProfileRemote@${mergedEnv.PROFILE_REMOTE_URL}ProfileRemote.container.js.bundle`,
-          // ProductRemote: `ProductRemote@${mergedEnv.PRODUCT_REMOTE_URL}ProductRemote.container.js.bundle`,
-          // CartRemote: `CartRemote@${mergedEnv.CART_REMOTE_URL}CartRemote.container.js.bundle`,
-          // ShippingAddressRemote: `ShippingAddressRemote@${mergedEnv.SHIPPING_ADDRESS_REMOTE_URL}ShippingAddressRemote.container.js.bundle`,
-          ProfileRemote: `ProfileRemote@https://t-android-feat-flux-store-nguy-n-danh-ti-n-profilerem-976e5f-ze.zephyrcloud.app/ProfileRemote.container.js.bundle`,
-          ProductRemote: `ProductRemote@https://t-android-feat-add-cart-screen-nguy-n-danh-ti-n-produ-eb31d6-ze.zephyrcloud.app/ProductRemote.container.js.bundle`,
-          CartRemote: `CartRemote@https://t-android-feat-flux-store-nguy-n-danh-ti-n-cartremote-6eb54f-ze.zephyrcloud.app/CartRemote.container.js.bundle`,
-          ShippingAddressRemote: `ShippingAddressRemote@https://t-android-feat-flux-store-nguy-n-danh-ti-n-shippingad-5f0311-ze.zephyrcloud.app/ShippingAddressRemote.container.js.bundle`,
-          // ProfileRemote: `ProfileRemote@http://127.0.0.1:9001/${platform}/ProfileRemote.container.js.bundle`,
-          // ProductRemote: `ProductRemote@http://127.0.0.1:9002/${platform}/ProductRemote.container.js.bundle`,
-          // CartRemote: `CartRemote@http://127.0.0.1:9003/${platform}/CartRemote.container.js.bundle`,
-          // ShippingAddressRemote: `ShippingAddressRemote@http://127.0.0.1:9004/${platform}/ShippingAddressRemote.container.js.bundle`,
-        },
+        remotes,
         runtimePlugins: [
           '@callstack/repack/mf/core-plugin',
           '@callstack/repack/mf/resolver-plugin',

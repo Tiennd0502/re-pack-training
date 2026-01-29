@@ -110,7 +110,7 @@ const Cart: React.FC<CartProps> = ({
         <Button
           className="mb-4"
           size="sm"
-          disabled={!(carts?.length && totalPrice)}
+          disabled={totalPrice === '0'}
           text="Proceed to checkout"
           onPress={onCheckout}
         />
