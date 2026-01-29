@@ -18,6 +18,7 @@ interface ControllerInputProps<
   keyboardType?: KeyboardTypeOptions;
   returnKeyType?: ReturnKeyTypeOptions;
   placeholder?: string;
+  onSubmit?: () => void;
   onFocusNextInput?: (field: keyof T) => void;
   clearError?: () => void;
 }
@@ -34,13 +35,15 @@ const ControllerInput = <T extends FieldValues>({
   keyboardType = "default",
   onFocusNextInput,
   clearError,
+  onSubmit,
   ...props
 }: ControllerInputProps<T>) => {
   const handleSubmitEditing = useCallback(() => {
     if (nextField && onFocusNextInput) {
       onFocusNextInput(nextField);
     }
-  }, [nextField, onFocusNextInput]);
+    onSubmit?.();
+  }, [nextField, onFocusNextInput, onSubmit]);
 
   return (
     <Controller

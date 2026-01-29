@@ -88,8 +88,10 @@ const Header = () => {
       case SCREENS.HOME: {
         return {
           title: 'Fluxstore',
-          leftIcon: <MenuIcon onPress={handleShowMenu} />,
-          rightIcon: <NotificationIcon onPress={handleShowNotification} />,
+          leftIcon: <MenuIcon onPress={handleShowMenu} disabled />,
+          rightIcon: (
+            <NotificationIcon onPress={handleShowNotification} disabled />
+          ),
         };
       }
 

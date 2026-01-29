@@ -96,9 +96,13 @@ const Products: React.FC<ProductsProps> = ({
           activeOpacity={0.6}
           onPress={handleShowFilter}
         >
-          <View className="flex-row justify-center items-center gap-2 rounded-full w-24 h-10 border-2 border-quaternary text-primary">
-            <Text className="text-sm font-primary text-primary">Filter</Text>
-            <ChevronIcon className="text-primary" direction={DIRECTION.DOWN} />
+          <View className="flex-row justify-center items-center gap-2 rounded-full w-24 h-10 text-primary">
+            <Text className="text-sm font-primary text-quaternary">Filter</Text>
+            <ChevronIcon
+              className="text-quaternary"
+              direction={DIRECTION.DOWN}
+              disabled
+            />
           </View>
         </TouchableOpacity>
       </View>

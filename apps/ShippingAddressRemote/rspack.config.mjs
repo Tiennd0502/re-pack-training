@@ -29,7 +29,7 @@ const config = (envConfig) => {
         '@repo/stores': path.resolve(__dirname, '../../packages/stores/src'),
         '@repo/ui': path.resolve(__dirname, '../../packages/ui/src'),
         '@repo/utils': path.resolve(__dirname, '../../packages/utils/src'),
-      },
+      }
     },
 
     module: {
@@ -85,10 +85,12 @@ const config = (envConfig) => {
           react: {
             singleton: true,
             eager: true,
+            requiredVersion: '^19.1.0',
           },
           'react-native': {
             singleton: true,
             eager: true,
+            requiredVersion: '^0.81.5',
           },
           'react/jsx-runtime': {
             singleton: true,
@@ -98,11 +100,11 @@ const config = (envConfig) => {
             singleton: true,
             eager: true,
           },
-          tailwindcss: {
+          'tailwindcss': {
             singleton: true,
             eager: true,
           },
-          nativewind: {
+          'nativewind': {
             singleton: true,
             eager: true,
           },

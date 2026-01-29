@@ -5,7 +5,7 @@
   "slug": "repackapp",
   "extra": {
     "eas": {
-      "projectId": "ce144942-71c8-4b99-8c99-f6199d01650b"
+      "projectId": "bcf5ff21-52f5-406e-a269-31a2095120a5"
     }
   },
   "platforms": ["ios", "android", "web"]

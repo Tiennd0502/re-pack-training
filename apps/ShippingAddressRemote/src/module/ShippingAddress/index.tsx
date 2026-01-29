@@ -228,6 +228,7 @@ const ShippingAddress = ({ user, onCheckout }: ShippingAddressProps) => {
           <Text className="text-error text-sm">{errorMessage}</Text>
         )}
         <Button
+          className="mb-4"
           disabled={!user}
           text="Continue to payment"
           onPress={handleSubmit(onSubmit, handleErrorForm)}

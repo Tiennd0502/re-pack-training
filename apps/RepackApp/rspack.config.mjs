@@ -74,7 +74,6 @@ const config = (envConfig, _argv) => {
     },
     optimization: {
       minimize: mode === 'production',
-      chunkIds: 'named',
     },
     module: {
       rules: [
@@ -135,8 +134,8 @@ const config = (envConfig, _argv) => {
           '@callstack/repack/mf/prefetch-plugin',
         ],
         shared: {
-          react: { singleton: true, eager: true },
-          'react-native': { singleton: true, eager: true },
+          react: { singleton: true, eager: true, requiredVersion: '^19.1.0' },
+          'react-native': { singleton: true, eager: true, requiredVersion: '^0.81.5' },
           'react/jsx-runtime': { singleton: true, eager: true },
           'react-native-svg': { singleton: true, eager: true },
           'nativewind': { singleton: true, eager: true },

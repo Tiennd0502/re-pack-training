@@ -91,10 +91,12 @@ const config = envConfig => {
           react: {
             singleton: true,
             eager: true,
+            requiredVersion: '^19.1.0',
           },
           'react-native': {
             singleton: true,
             eager: true,
+            requiredVersion: '^0.81.5',
           },
           'react/jsx-runtime': {
             singleton: true,

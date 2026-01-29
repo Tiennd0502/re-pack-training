@@ -132,9 +132,6 @@ const styles = StyleSheet.create({
   content: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-    elevation: 10,
+    boxShadow: '0px -2px 1px .2px #00000010',
   },
 });

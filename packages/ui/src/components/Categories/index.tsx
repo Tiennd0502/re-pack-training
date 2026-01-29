@@ -11,7 +11,7 @@ import { useTheme } from "@repo/hooks/useTheme";
 interface CategoriesProps {
   list: Category[];
   keyActivated?: string;
-  onChange: (item: Category) => void;
+  onChange?: (item: Category) => void;
   className?: string;
 }
 
@@ -51,8 +51,9 @@ const Categories = ({
         return (
           <TouchableOpacity
             key={key}
+            disabled={!onChange}
             activeOpacity={0.8}
-            onPress={() => onChange(item)}
+            onPress={() => onChange?.(item)}
             className="justify-center items-center gap-[6px]"
           >
             <View className={boxIconClassName}>

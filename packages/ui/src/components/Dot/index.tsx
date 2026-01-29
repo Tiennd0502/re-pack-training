@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -33,32 +33,41 @@ const Dot = ({
     transform: [{ scale: scale.value }],
   }));
 
-  const dotStyles = useMemo(
-    () => ({
-      width: isActive ? size : size - 10,
-      height: isActive ? size : size - 10,
-      borderWidth: isActive ? 5 : 1,
-      borderColor: isActive ? theme.tertiary : theme.primary,
-      backgroundColor: color,
-      borderRadius: size,
-    }),
-    [isActive, color, size, theme.primary, theme.tertiary],
-  );
+  const dotStyles = {
+    width: isActive ? size : size - 10,
+    height: isActive ? size : size - 10,
+    borderWidth: isActive ? 5 : 1,
+    borderColor: isActive ? theme.tertiary : theme.primary,
+    backgroundColor: color,
+    borderRadius: size,
+  };
 
   const handleSelect = () => {
     "worklet";
-
-    scale.value = withSpring(1.1, {}, () => {
-      scale.value = withSpring(1);
-      runOnJS(onSelect)();
-    });
+    runOnJS(onSelect)();
+    scale.value = withSpring(
+      1.1,
+      {
+        damping: 15,
+        stiffness: 300,
+      },
+      () => {
+        scale.value = withSpring(1, {
+          damping: 15,
+          stiffness: 300,
+        });
+      },
+    );
   };
 
   const press = Gesture.Pan()
     .onBegin(handleSelect)
     ?.onEnd(() => {
       "worklet";
-      scale.value = withSpring(1, { duration: 180 });
+      scale.value = withSpring(1, {
+        damping: 15,
+        stiffness: 300,
+      });
     });
 
   const composed = Gesture.Simultaneous(press);

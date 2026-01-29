@@ -1,6 +1,6 @@
 import { Platform, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -67,16 +67,10 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
     [pages],
   );
 
-  const [categoryKey, setCategoryKey] = useState(CATEGORIES[0]);
-
   const containerClassName = twMerge(
     'flex-1 w-full h-full justify-start mt-10 pb-[${isAndroid ? 130 : 100}px]',
     isAndroid ? 'pb-[100px]' : 'pb-[80px]',
   );
-
-  const handleChangeCategory = useCallback((value: Category) => {
-    setCategoryKey(value);
-  }, []);
 
   const handleShowAllProduct = useCallback(() => {
     navigation.navigate(SCREENS.PRODUCTS);
@@ -97,12 +91,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
 
   const handlePressCollection = useCallback(() => {}, []);
 
-  const handlePressBeautyBanner = useCallback(() => {}, []);
-
-  const handlePressShirtsBanner = useCallback(() => {}, []);
-
-  const handlePressDressesBanner = useCallback(() => {}, []);
-
   const handleShowAllTopCollection = useCallback(() => {}, []);
 
   return (
@@ -110,11 +98,7 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className={containerClassName}>
           <View className="justify-start gap-5 px-6">
-            <Categories
-              list={CATEGORIES}
-              keyActivated={categoryKey.key}
-              onChange={handleChangeCategory}
-            />
+            <Categories list={CATEGORIES} keyActivated={CATEGORIES[0].key} />
 
             <View className="w-full flex-row justify-between items-center">
               <Text className="text-xl font-bold text-primary">
@@ -170,14 +154,16 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               onLoadMore={handleLoadMoreProduct}
             />
           </View>
-          <View className="flex-row justify-between items-center mt-3 mb-2 px-6">
+          <View className="w-full flex-row justify-between items-center mt-3 mb-2 px-6">
             <Text className="text-xl font-bold text-primary">
               Top Collection
             </Text>
             <Button
+              disabled
               variant="ghost"
               text="Show all"
-              className="text-sm text-senary"
+              className="text-sm pr-0 w-auto"
+              textClassName="text-quaternary"
               onPress={handleShowAllTopCollection}
             />
           </View>
@@ -190,7 +176,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               widthImage={128}
               heightImage={141}
               type={PromoBannerType.Secondary}
-              onPress={handlePressBeautyBanner}
             />
             <PromoBanner
               title={`Most sexy\n& fabulous\ndesign`}
@@ -200,7 +185,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               widthImage={128}
               heightImage={210}
               type={PromoBannerType.Tertiary}
-              onPress={handlePressBeautyBanner}
             />
           </View>
           <View className="flex-row justify-between gap-5 mt-5 px-6">
@@ -213,7 +197,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               heightImage={194}
               isReversed
               type={PromoBannerType.Quaternary}
-              onPress={handlePressShirtsBanner}
             />
             <PromoBanner
               title={`Elegant\nDesign`}
@@ -223,7 +206,6 @@ const Home = ({ navigation }: { navigation: NavigationProp<any> }) => {
               widthImage={110}
               heightImage={194}
               type={PromoBannerType.Quaternary}
-              onPress={handlePressDressesBanner}
             />
           </View>
         </View>

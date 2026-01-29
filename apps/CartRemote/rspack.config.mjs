@@ -22,7 +22,6 @@ const config = envConfig => {
       ...Repack.getResolveOptions(),
       alias: {
         '@': path.resolve(process.cwd(), 'src'),
-        '@css': path.resolve(__dirname, '../../nativewind.css'),
         '@repo/constants': path.resolve(
           __dirname,
           '../../packages/constants/src',
@@ -92,10 +91,12 @@ const config = envConfig => {
           react: {
             singleton: true,
             eager: true,
+            requiredVersion: '^19.1.0',
           },
           'react-native': {
             singleton: true,
             eager: true,
+            requiredVersion: '^0.81.5',
           },
           'react/jsx-runtime': {
             singleton: true,
