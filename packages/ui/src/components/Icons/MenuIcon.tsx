@@ -29,7 +29,7 @@ export const MenuIcon = memo(
         <Svg width={width} height={height} viewBox="0 0 20 20" fill="none">
           <Path
             d="M1 1.5h10M1 9.5h18M1 18.5h18"
-            stroke={color || theme.primary}
+            stroke={color || (disabled ? theme.quaternary : theme.primary)}
             strokeWidth={2}
             strokeLinecap="round"
           />

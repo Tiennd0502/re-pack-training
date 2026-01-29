@@ -25,7 +25,7 @@ interface PromoBannerProps {
   height: DimensionValue;
   widthImage: number;
   heightImage: number;
-  onPress: () => void;
+  onPress?: () => void;
   className?: string;
 }
 
@@ -73,6 +73,7 @@ const PromoBanner = ({
       activeOpacity={0.8}
       className={wrapperClassName}
       style={{ height }}
+      disabled={!onPress}
       onPress={onPress}
     >
       <View className="flex-1 justify-center items-start gap-6">

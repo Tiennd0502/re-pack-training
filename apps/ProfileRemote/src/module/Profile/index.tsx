@@ -33,7 +33,7 @@ const Profile: React.FC<ProfileProps> = ({ user, onLogout }) => {
     <View className="px-5 py-4 justify-center mt-10">
       <View className="items-center py-[30px] border-b border-quaternary">
         <View className="mb-4">
-          <View className="w-[100px] h-[100px] rounded-full bg-info justify-center items-center overflow-hidden">
+          <View className="w-[100px] h-[100px] rounded-full bg-quaternary justify-center items-center overflow-hidden">
             {avatar ? (
               <Image
                 source={{ uri: avatar }}
@@ -62,26 +62,31 @@ const Profile: React.FC<ProfileProps> = ({ user, onLogout }) => {
 
       <View className="bg-background mt-3 py-3">
         <ProfileItem
+          disabled
           title="Address"
           icon={<AddressIcon />}
           onPress={handleGoToAddress}
         />
         <ProfileItem
+          disabled
           title="Payment Method"
           icon={<WalletIcon />}
           onPress={handleGoToPaymentMethod}
         />
         <ProfileItem
+          disabled
           title="Voucher"
           icon={<VoucherIcon />}
           onPress={handleGoToVoucher}
         />
         <ProfileItem
+          disabled
           title="My Wishlist"
           icon={<HeartIcon />}
           onPress={handleGoToWishlist}
         />
         <ProfileItem
+          disabled
           title="Rate this app"
           icon={<StarIcon width={20} height={20} color="currentColor" />}
           onPress={handleGoToRating}

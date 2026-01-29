@@ -70,7 +70,7 @@ const ChevronIcon = memo(
           <Svg width={width} height={height} viewBox="0 0 14 9" fill="none">
             <Path
               d="M13 1L7 7 1 1"
-              stroke={color || theme.primary}
+              stroke={color || (disabled ? theme.quaternary : theme.primary)}
               strokeWidth={2}
             />
           </Svg>

@@ -11,19 +11,32 @@ import Divider from "../Divider";
 interface ProfileItemProps {
   icon: ReactNode;
   title: string;
-  onPress: () => void;
+  disabled?: boolean;
+  onPress?: () => void;
 }
 
-const ProfileItem = ({ icon, title, onPress }: ProfileItemProps) => {
+const ProfileItem = ({
+  icon,
+  title,
+  disabled = false,
+  onPress,
+}: ProfileItemProps) => {
+  const wrapperClassName = disabled ? "opacity-50" : "";
+
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      disabled={disabled}
+      onPress={onPress}
+      className={wrapperClassName}
+    >
       <View className="flex-row items-center align-middle justify-between py-5">
         <View className="w-[20px] justify-center items-center">{icon}</View>
         <View className="ml-[10px]">
           <Text className="text-primary text-base font-primary">{title}</Text>
         </View>
         <View className="ml-auto mr-0">
-          <ChevronIcon direction={DIRECTION.RIGHT} disabled />
+          <ChevronIcon direction={DIRECTION.RIGHT} />
         </View>
       </View>
       <Divider />

@@ -22,9 +22,9 @@ import { useUserStore } from '@repo/stores/user';
 import MainLayout from '@/components/MainLayout';
 import Button from '@repo/ui/components/Button';
 import ControllerInput from '@repo/ui/components/ControllerInput';
-import AppleIcon from '@repo/ui/components/Icons/AppleIcon';
-import FacebookIcon from '@repo/ui/components/Icons/FacebookIcon';
-import GoogleIcon from '@repo/ui/components/Icons/GoogleIcon';
+// import AppleIcon from '@repo/ui/components/Icons/AppleIcon';
+// import FacebookIcon from '@repo/ui/components/Icons/FacebookIcon';
+// import GoogleIcon from '@repo/ui/components/Icons/GoogleIcon';
 
 const LoginScreen = () => {
   const setIsAuthenticated = useAuthStore(state => state.setIsAuthenticated);
@@ -51,16 +51,12 @@ const LoginScreen = () => {
     control,
     handleSubmit,
     reset,
-    watch,
     formState: { isSubmitting },
   } = useForm<LoginPayLoad>({
     defaultValues,
     mode: 'onBlur',
   });
   const isLoading = Boolean(isSubmitting || isPending);
-  const email = watch('email');
-  const password = watch('password');
-  const hasValidationErrors = !email || !password;
 
   const handleClearErrorMessage = useCallback(() => setErrorMessage(''), []);
 
@@ -118,6 +114,7 @@ const LoginScreen = () => {
             secureTextEntry
             returnKeyType="done"
             clearError={handleClearErrorMessage}
+            onSubmit={handleSubmit(handleLogin)}
           />
         </View>
 
@@ -136,18 +133,18 @@ const LoginScreen = () => {
           <Button
             text="Login"
             className="w-36"
-            disabled={isLoading || hasValidationErrors}
+            disabled={isLoading}
             isLoading={Boolean(isSubmitting || isPending)}
             onPress={handleSubmit(handleLogin)}
           />
-          <Text className="text-primary text-xs font-light">
+          {/* <Text className="text-primary text-xs font-light">
             or log in with
           </Text>
           <View className="flex-row gap-5">
-            <AppleIcon />
-            <GoogleIcon />
-            <FacebookIcon />
-          </View>
+            <AppleIcon disabled />
+            <GoogleIcon disabled />
+            <FacebookIcon disabled />
+          </View> */}
         </View>
 
         <View className="mt-7 mb-0 w-full flex-row justify-center items-center align-center gap-1">
@@ -157,7 +154,7 @@ const LoginScreen = () => {
             text="Sign Up"
             variant="ghost"
             className="p-0 w-fit"
-            textClassName="text-primary text-xs underline"
+            textClassName="text-quaternary text-xs underline"
             onPress={() => {}}
           />
         </View>
