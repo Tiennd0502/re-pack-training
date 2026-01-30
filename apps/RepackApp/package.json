@@ -11,6 +11,8 @@
     "build:release": "pnpm run build:bundle && pnpm run build:apk",
     "build:eas:release": "eas build -p android --profile release --non-interactive --no-wait",
     "build:eas:preview": "eas build -p android --profile preview --non-interactive --no-wait",
+    "eas:preview:local": "eas build -p android --profile preview --local",
+    "eas:release:local": "eas build -p android --profile release --local",
     "android": "react-native run-android --port 8081",
     "ios": "react-native run-ios --port 8081",
     "lint": "eslint .",
