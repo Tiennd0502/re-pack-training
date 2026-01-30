@@ -5,10 +5,7 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "apk",
-        "cache": {
-          "disabled": true
-        }
+        "buildType": "apk"
       },
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
@@ -17,17 +14,14 @@
     },
     "release": {
       "android": {
-        "buildType": "apk",
-        "cache": {
-          "disabled": true
-        }
+        "buildType": "apk"
       },
       "env": {
         "PNPM_FLAGS": "--no-frozen-lockfile",
         "CI": "false"
       },
       "cache": {
-        "disabled": true
+        "disabled": false
       }
     }
   },
